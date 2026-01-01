@@ -1,0 +1,21 @@
+package com.gram.panchayat.services;
+
+import java.util.List;
+
+import com.gram.panchayat.common.ApiResponse;
+import com.gram.panchayat.dto.ApplicationStatusUpdateRequestDto;
+import com.gram.panchayat.dto.DeathCertificateApplicationRequestDto;
+import com.gram.panchayat.model.DeathApplication;
+
+public interface DeathService {
+
+	ApiResponse applyDeathCertificate(DeathCertificateApplicationRequestDto request);
+
+	ApiResponse updateDeathApplicationStatus(ApplicationStatusUpdateRequestDto request);
+
+	DeathApplication getDeathCertificateApplicatioByApplicationId(Long applicationId);
+
+	List<DeathApplication> getDeathApplicationByStatus(String appliationStatus);
+
+	void updateDeathApplicationStatus(Long applicationId, String status, String adminComment);
+}
