@@ -63,6 +63,7 @@ public class CitizenAuthController {
 			session.setAttribute("user", user);
 			session.setAttribute("regUserId", user.getRegUserId());
 			session.setAttribute("username", user.getUsername());
+			session.setAttribute("userRole", user.getUserRole());
 			return new ApiResponse(true, "LOGIN");
 		}).orElseGet(() -> {
 			session.setAttribute("TEMP_MOBILE", mobileNo);

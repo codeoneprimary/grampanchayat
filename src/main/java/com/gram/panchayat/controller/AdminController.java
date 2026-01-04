@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.gram.panchayat.common.ApiResponse;
 import com.gram.panchayat.common.GramPanchayatConstant;
 import com.gram.panchayat.dto.UserDto;
-import com.gram.panchayat.model.User;
 import com.gram.panchayat.services.UserService;
 
 import jakarta.servlet.http.HttpSession;
@@ -25,11 +24,9 @@ public class AdminController {
 
 	@PostMapping("/addAdmin")
 	public ApiResponse addAdmin(@RequestBody UserDto userDto, HttpSession session) {
-
-		User loggedIn = (User) session.getAttribute("USER");
-
 		userDto.setUserRole(GramPanchayatConstant.ADMIN);
 		ApiResponse apiResponse = userService.registerAdminUser(userDto);
 		return apiResponse;
 	}
+
 }

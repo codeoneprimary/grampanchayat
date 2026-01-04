@@ -5,11 +5,14 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.gram.panchayat.model.DobApplication;
+import com.gram.panchayat.model.User;
 
 public interface DobApplicationRepository extends JpaRepository<DobApplication, Long> {
 
 	DobApplication findByApplicationId(Long applicationId);
 
 	List<DobApplication> findByStatus(String status);
+
+	List<DobApplication> findByAppliedBy(User appliedBy);
 
 }

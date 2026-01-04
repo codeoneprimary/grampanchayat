@@ -13,10 +13,12 @@ public interface DobService {
 
 	ApiResponse updateDOBApplicationStatus(ApplicationStatusUpdateRequestDto request);
 
-	DobApplication getDobApplicationByApplicationId(Long applicationId);
+	DobApplication findDobApplicationByApplicationId(Long applicationId);
 
-	List<DobApplication> getDobApplicationByStatus(String appliucationStatus);
+	List<DobApplication> findDobApplicationByStatus(String applicationStatus);
 
 	void updateDobApplicationStatus(Long applicationId, String status, String adminComment);
+
+	List<DobApplication> findDobApplicationByUser(Long regUserId);
 
 }

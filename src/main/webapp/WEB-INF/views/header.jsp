@@ -80,12 +80,27 @@
 			MAHARASHTRA</div>
 		<div class="topbar1-right">
 			<!-- Language Switch -->
+			<c:set var="currentLang"
+				value="${pageContext.response.locale.language}" />
+
 			<form method="get" action="" style="display: inline;">
 				<select name="lang" onchange="this.form.submit()">
-					<option value="en" ${param.lang == 'en' ? 'selected' : ''}>English</option>
-					<option value="mr" ${param.lang == 'mr' ? 'selected' : ''}>Marathi</option>
+
+					<c:choose>
+						<c:when test="${currentLang eq 'mr'}">
+							<option value="mr" selected>Marathi</option>
+							<option value="en">English</option>
+						</c:when>
+
+						<c:otherwise>
+							<option value="en" selected>English</option>
+							<option value="mr">Marathi</option>
+						</c:otherwise>
+					</c:choose>
+
 				</select>
 			</form>
+
 			<!-- User Login Icon -->
 			<div class="nav-item dropdown d-inline">
 				<a href="#" class="nav-link dropdown-toggle d-inline"
@@ -105,11 +120,24 @@
 								href="logout"><i class="fas fa-sign-out-alt me-2"></i>
 									Logout</a></li>
 
-							<li class="nav-item"><a
-								class="dropdown-item ${fn:contains(currentPage,'adminRegistration')?'active':''}"
-								href="adminRegistration"><i class="fas fa-user-plus me-2"></i>
-									Admin Register</a></li>
+							<c:if
+								test="${not empty sessionScope.userRole and sessionScope.userRole eq 'ADMIN'}">
+								<li class="nav-item"><a
+									class="dropdown-item ${fn:contains(currentPage,'adminRegistration')?'active':''}"
+									href="adminRegistration"><i class="fas fa-user-plus me-2"></i>
+										Admin Register</a></li>
 
+								<li class="nav-item"><a
+									class="dropdown-item ${fn:contains(currentPage,'addsNews')?'active':''}"
+									href="addsNews"><i class="fas fa-newspaper me-2"></i> <spring:message
+											code="header.important_announcement" /></a></li>
+
+							</c:if>
+
+							<li class="nav-item"><a
+								class="dropdown-item ${fn:contains(currentPage,'userApplications')?'active':''}"
+								href="userApplications"><i class="bi bi-grid-3x3-gap me-2"></i>
+									User Applications</a></li>
 						</c:if>
 						<c:if test="${empty sessionScope.regUserId}">
 							<li class="nav-item"><a

@@ -108,8 +108,8 @@
 	    })
 	    .then(res => res.json())
 	    .then(data => {
-			 
-	    	console.log("done");
+	    	 window.location.href =
+	                "<%=request.getContextPath()%>/home";
 	    });
 	}
 		

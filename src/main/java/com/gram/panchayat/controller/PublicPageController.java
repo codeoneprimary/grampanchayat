@@ -1,7 +1,10 @@
 package com.gram.panchayat.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import com.gram.panchayat.services.DailyNewsService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -9,13 +12,23 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class PublicPageController {
 
+	private final DailyNewsService dailyNewsService;
+
+	public PublicPageController(DailyNewsService dailyNewsService) {
+		this.dailyNewsService = dailyNewsService;
+	}
+
 	@GetMapping("/")
-	public String index() {
+	public String index(Model model) {
+
+		model.addAttribute("dailyNewsList", dailyNewsService.findDailyNews());
 		return "home";
 	}
 
 	@GetMapping("/home")
-	public String home() {
+	public String home(Model model) {
+
+		model.addAttribute("dailyNewsList", dailyNewsService.findDailyNews());
 		return "home";
 	}
 

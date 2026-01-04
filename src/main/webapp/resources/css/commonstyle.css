@@ -82,6 +82,8 @@ table caption {
 	background-color: #f5f5f5;
 	font-size: 14px;
 	padding: 3px 15px;
+	position: relative;
+	z-index: 1055;
 }
 
 .topbar1-left {

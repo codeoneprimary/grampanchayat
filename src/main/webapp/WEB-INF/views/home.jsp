@@ -53,21 +53,23 @@
 		<div class="card shadow-sm mt-3">
 			<div class="card-header bg-success text-white">
 				📢
-				<spring:message code="home.important_announcements" />
+				<spring:message code="header.important_announcement" />
 			</div>
 			<div class="text-scroll-box">
 				<div class="text-scroll-track scroll-active">
 					<div class="text-scroll-content">
-						<span>Important Government Announcement</span> <span>New
-							Schemes Available for Citizens</span> <span>Apply Online via
-							Official Government Portals</span>
-					</div>
+						<c:forEach var="dailyNews" items="${dailyNewsList}"
+							varStatus="status">
 
-					<!-- Duplicate for seamless loop -->
+							<span>${dailyNews.description}</span>
+						</c:forEach>
+					</div>
 					<div class="text-scroll-content">
-						<span>Important Government Announcement</span> <span>New
-							Schemes Available for Citizens</span> <span>Apply Online via
-							Official Government Portals</span>
+						<c:forEach var="dailyNews" items="${dailyNewsList}"
+							varStatus="status">
+
+							<span>${dailyNews.description}</span>
+						</c:forEach>
 					</div>
 				</div>
 			</div>

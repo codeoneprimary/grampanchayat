@@ -13,9 +13,11 @@ public interface DeathService {
 
 	ApiResponse updateDeathApplicationStatus(ApplicationStatusUpdateRequestDto request);
 
-	DeathApplication getDeathCertificateApplicatioByApplicationId(Long applicationId);
+	DeathApplication findDeathCertificateApplicatioByApplicationId(Long applicationId);
 
-	List<DeathApplication> getDeathApplicationByStatus(String appliationStatus);
+	List<DeathApplication> findDeathApplicationByStatus(String applicationStatus);
 
 	void updateDeathApplicationStatus(Long applicationId, String status, String adminComment);
+
+	List<DeathApplication> findDeathApplicationUser(Long regUserId);
 }

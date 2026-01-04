@@ -70,51 +70,59 @@
                                   'bg-warning'}">
 								${application.status} </span></td>
 					</tr>
+
+					<tr>
+						<th><spring:message code="application_details.admin_remark" /></th>
+						<td>${application.statusRemark}</td>
+					</tr>
 				</table>
 
 				<!-- STATUS UPDATE FORM (ADMIN) -->
-				<div class="card mt-4">
-					<div class="card-body">
-						<h5 class="card-title mb-3">
-							<spring:message
-								code="application_details.update_application_status" />
-						</h5>
-						<form action="updateDeathApplicationStatus" method="post">
 
-							<input type="hidden" name="applicationId"
-								value="${application.applicationId}" />
-
-							<div class="mb-3">
-								<label class="form-label"><spring:message
-										code="application_details.select_statuss" /></label> <select
-									name="status" class="form-select" required>
-									<option value="PENDING"
-										${application.status == 'PENDING' ? 'selected' : ''}>Pending</option>
-									<option value="APPROVED"
-										${application.status == 'APPROVED' ? 'selected' : ''}>Approved</option>
-									<option value="REJECTED"
-										${application.status == 'REJECTED' ? 'selected' : ''}>Rejected</option>
-								</select>
-							</div>
-
-							<!-- COMMENT -->
-							<div class="mb-3">
-								<label class="form-label"><spring:message
-										code="application_details.admin_remark" /></label>
-								<textarea name="adminComment" class="form-control" rows="3"
-									placeholder="Enter comment if any...">${application.statusRemark}</textarea>
-							</div>
-
-							<button type="submit" class="btn btn-success">
+				<c:if
+					test="${not empty sessionScope.userRole and sessionScope.userRole eq 'ADMIN'}">
+					<div class="card mt-4">
+						<div class="card-body">
+							<h5 class="card-title mb-3">
 								<spring:message
-									code="application_details.update_application_status_button" />
-							</button>
+									code="application_details.update_application_status" />
+							</h5>
+							<form action="updateDeathApplicationStatus" method="post">
 
-						</form>
+								<input type="hidden" name="applicationId"
+									value="${application.applicationId}" />
 
+								<div class="mb-3">
+									<label class="form-label"><spring:message
+											code="application_details.select_statuss" /></label> <select
+										name="status" class="form-select" required>
+										<option value="PENDING"
+											${application.status == 'PENDING' ? 'selected' : ''}>Pending</option>
+										<option value="APPROVED"
+											${application.status == 'APPROVED' ? 'selected' : ''}>Approved</option>
+										<option value="REJECTED"
+											${application.status == 'REJECTED' ? 'selected' : ''}>Rejected</option>
+									</select>
+								</div>
+
+								<!-- COMMENT -->
+								<div class="mb-3">
+									<label class="form-label"><spring:message
+											code="application_details.admin_remark" /></label>
+									<textarea name="adminComment" class="form-control" rows="3"
+										placeholder="Enter comment if any...">${application.statusRemark}</textarea>
+								</div>
+
+								<button type="submit" class="btn btn-success">
+									<spring:message
+										code="application_details.update_application_status_button" />
+								</button>
+
+							</form>
+
+						</div>
 					</div>
-				</div>
-
+				</c:if>
 			</div>
 		</div>
 

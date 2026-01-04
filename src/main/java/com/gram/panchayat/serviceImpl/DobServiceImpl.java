@@ -91,13 +91,13 @@ public class DobServiceImpl implements DobService {
 	}
 
 	@Override
-	public DobApplication getDobApplicationByApplicationId(Long applicationId) {
+	public DobApplication findDobApplicationByApplicationId(Long applicationId) {
 		DobApplication dobApplication = dobApplicationRepository.findByApplicationId(applicationId);
 		return dobApplication;
 	}
 
 	@Override
-	public List<DobApplication> getDobApplicationByStatus(String appliucationStatus) {
+	public List<DobApplication> findDobApplicationByStatus(String appliucationStatus) {
 		return dobApplicationRepository.findByStatus(appliucationStatus);
 	}
 
@@ -108,5 +108,11 @@ public class DobServiceImpl implements DobService {
 		dobApplication.setStatus(status);
 		dobApplication.setStatusRemark(adminComment);
 		dobApplicationRepository.save(dobApplication);
+	}
+
+	@Override
+	public List<DobApplication> findDobApplicationByUser(Long regUserId) {
+		User applicant = userRepository.findById(regUserId).orElseThrow(() -> new RuntimeException("User not found"));
+		return dobApplicationRepository.findByAppliedBy(applicant);
 	}
 }

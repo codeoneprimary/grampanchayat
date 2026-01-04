@@ -101,13 +101,13 @@ public class DeathServiceImpl implements DeathService {
 	}
 
 	@Override
-	public DeathApplication getDeathCertificateApplicatioByApplicationId(Long applicationId) {
+	public DeathApplication findDeathCertificateApplicatioByApplicationId(Long applicationId) {
 		DeathApplication deathApplication = deathApplicationRepository.findByApplicationId(applicationId);
 		return deathApplication;
 	}
 
 	@Override
-	public List<DeathApplication> getDeathApplicationByStatus(String appliationStatus) {
+	public List<DeathApplication> findDeathApplicationByStatus(String appliationStatus) {
 		return deathApplicationRepository.findByStatus(appliationStatus);
 	}
 
@@ -117,5 +117,11 @@ public class DeathServiceImpl implements DeathService {
 		deathApplication.setStatus(status);
 		deathApplication.setStatusRemark(adminComment);
 		deathApplicationRepository.save(deathApplication);
+	}
+
+	@Override
+	public List<DeathApplication> findDeathApplicationUser(Long regUserId) {
+		User applicant = userRepository.findById(regUserId).orElseThrow(() -> new RuntimeException("User not found"));
+		return deathApplicationRepository.findByAppliedBy(applicant);
 	}
 }

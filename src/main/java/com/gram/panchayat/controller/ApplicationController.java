@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.gram.panchayat.common.GramPanchayatConstant;
 import com.gram.panchayat.model.DeathApplication;
 import com.gram.panchayat.model.DobApplication;
+import com.gram.panchayat.services.DailyNewsService;
 import com.gram.panchayat.services.DeathService;
 import com.gram.panchayat.services.DobService;
 
@@ -21,10 +23,12 @@ public class ApplicationController {
 
 	private final DobService dobService;
 	private final DeathService deathService;
+	private final DailyNewsService dailyNewsService;
 
-	public ApplicationController(DobService dobService, DeathService deathService) {
+	public ApplicationController(DobService dobService, DeathService deathService, DailyNewsService dailyNewsService) {
 		this.dobService = dobService;
 		this.deathService = deathService;
+		this.dailyNewsService = dailyNewsService;
 	}
 
 	@GetMapping("/login")
@@ -42,11 +46,6 @@ public class ApplicationController {
 		return "userOtp";
 	}
 
-	@GetMapping("/adminRegistration")
-	public String adminRegistration() {
-		return "adminRegistration";
-	}
-
 	@GetMapping("/birthCertificateApplication")
 	public String birthCertificateApplication(HttpSession session) {
 		Long userId = (Long) session.getAttribute("regUserId");
@@ -60,7 +59,7 @@ public class ApplicationController {
 	public String acknowledgmentBirthCertificateApplication(@RequestParam("applicationId") Long applicationId,
 			Model model) {
 
-		DobApplication dobApplication = dobService.getDobApplicationByApplicationId(applicationId);
+		DobApplication dobApplication = dobService.findDobApplicationByApplicationId(applicationId);
 
 		// Current date
 		String applicationDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
@@ -85,7 +84,7 @@ public class ApplicationController {
 	public String acknowledgmentDeathCertificateApplication(@RequestParam("applicationId") Long applicationId,
 			Model model) {
 
-		DeathApplication deathApplication = deathService.getDeathCertificateApplicatioByApplicationId(applicationId);
+		DeathApplication deathApplication = deathService.findDeathCertificateApplicatioByApplicationId(applicationId);
 
 		// Current date
 		String applicationDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
@@ -103,15 +102,15 @@ public class ApplicationController {
 		if (userId == null) {
 			return "login";
 		}
-		model.addAttribute("deathApplicationList", deathService.getDeathApplicationByStatus("PENDING"));
-		model.addAttribute("dobApplicationList", dobService.getDobApplicationByStatus("PENDING"));
+		model.addAttribute("deathApplicationList", deathService.findDeathApplicationByStatus("PENDING"));
+		model.addAttribute("dobApplicationList", dobService.findDobApplicationByStatus("PENDING"));
 		return "applicationList";
 	}
 
 	@GetMapping("/dobApplicationDetails")
 	public String dobApplicationDetails(@RequestParam("applicationId") Long applicationId, Model model) {
 
-		DobApplication application = dobService.getDobApplicationByApplicationId(applicationId);
+		DobApplication application = dobService.findDobApplicationByApplicationId(applicationId);
 		model.addAttribute("application", application);
 
 		return "dobApplicationDetails";
@@ -129,7 +128,7 @@ public class ApplicationController {
 	@GetMapping("/deathApplicationDetails")
 	public String deathApplicationDetails(@RequestParam("applicationId") Long applicationId, Model model) {
 
-		DeathApplication application = deathService.getDeathCertificateApplicatioByApplicationId(applicationId);
+		DeathApplication application = deathService.findDeathCertificateApplicatioByApplicationId(applicationId);
 		model.addAttribute("application", application);
 
 		return "deathApplicationDetails";
@@ -142,6 +141,38 @@ public class ApplicationController {
 		deathService.updateDeathApplicationStatus(applicationId, status, adminComment);
 
 		return "redirect:/applicationList";
+	}
+
+	@GetMapping("/addsNews")
+	public String addsNews(HttpSession session, Model model) {
+		Long userId = (Long) session.getAttribute("regUserId");
+		String userRole = (String) session.getAttribute("userRole");
+		if (userId == null || !userRole.equals(GramPanchayatConstant.ADMIN)) {
+			return "login";
+		}
+		model.addAttribute("dailyNewsList", dailyNewsService.findDailyNews());
+		return "addsNews";
+	}
+
+	@GetMapping("/adminRegistration")
+	public String adminRegistration(HttpSession session) {
+		Long userId = (Long) session.getAttribute("regUserId");
+		String userRole = (String) session.getAttribute("userRole");
+		if (userId == null || !userRole.equals(GramPanchayatConstant.ADMIN)) {
+			return "login";
+		}
+		return "adminRegistration";
+	}
+
+	@GetMapping("/userApplications")
+	public String userApplications(HttpSession session, Model model) {
+		Long regUserId = (Long) session.getAttribute("regUserId");
+		if (regUserId == null) {
+			return "login";
+		}
+		model.addAttribute("deathApplicationList", deathService.findDeathApplicationUser(regUserId));
+		model.addAttribute("dobApplicationList", dobService.findDobApplicationByUser(regUserId));
+		return "userApplications";
 	}
 
 }
