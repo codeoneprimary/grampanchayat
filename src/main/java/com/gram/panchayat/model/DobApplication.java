@@ -41,6 +41,9 @@ public class DobApplication {
 	@Column(name = "STATE")
 	private String state;
 
+	@Column(name = "HOSPITAL_NAME")
+	private String hospitalName;
+
 	@Column(name = "DISTRICT")
 	private String district;
 
@@ -50,6 +53,12 @@ public class DobApplication {
 	@Column(name = "DOCTOR_CERTIFICATE")
 	private String doctorCertificate;
 
+	@Column(name = "MOBILE_NO")
+	private String mobileNo;
+
+	@Column(name = "EMAIL")
+	private String email;
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "APPLICATION_DATE")
 	private LocalDateTime applicationDate;
@@ -71,6 +80,14 @@ public class DobApplication {
 
 	public DobApplication() {
 
+	}
+
+	public String getMobileNo() {
+		return mobileNo;
+	}
+
+	public void setMobileNo(String mobileNo) {
+		this.mobileNo = mobileNo;
 	}
 
 	public Long getApplicationId() {
@@ -215,6 +232,22 @@ public class DobApplication {
 
 	public void setPincode(String pincode) {
 		this.pincode = pincode;
+	}
+
+	public String getHospitalName() {
+		return hospitalName;
+	}
+
+	public void setHospitalName(String hospitalName) {
+		this.hospitalName = hospitalName;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 }

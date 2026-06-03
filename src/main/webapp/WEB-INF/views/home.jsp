@@ -8,10 +8,199 @@
 
 <head>
 <meta charset="UTF-8">
-<title><spring:message code="header.home" /></title>
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
-<meta content="" name="keywords">
-<meta content="" name="description">
+<link rel="icon" type="image/png" sizes="32x32"
+	href="${pageContext.request.contextPath}/resources/img/titleIcon.jpg">
+
+<link rel="apple-touch-icon"
+	href="${pageContext.request.contextPath}/resources/img/titleIcon.jpg">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+	rel="stylesheet">
+<spring:message code="header.home" var="pageTitle" />
+<c:set var="pageDescription"
+	value="Official website of Deulgaon Gada Gram Panchayat, Maharashtra. Access property tax, certificates, schemes, and village information. देऊळगाव गाडा ग्रामपंचायत सेवा व माहिती." />
+
+
+<style>
+.pdf-card {
+	border-radius: 10px;
+	transition: 0.3s;
+	box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+}
+
+.pdf-card:hover {
+	transform: translateY(-3px);
+	box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+}
+
+.pdf-icon {
+	font-size: 30px;
+	color: #dc3545;
+}
+
+.pdf-name {
+	font-size: 14px;
+	font-weight: 500;
+	word-break: break-word;
+}
+/* MAIN BOX */
+.notice-section {
+	border: 1px solid #808080;
+	border-radius: 10px;
+	overflow: hidden;
+	background: #fff;
+	margin-top: 10px;
+}
+
+/* HEADER */
+.notice-header {
+	background: #2c70c3;
+	color: #fff;
+	padding: 10px 15px;
+}
+
+/* ICON */
+.icon-box {
+	background: #ff7a00;
+	padding: 6px 8px;
+	border-radius: 5px;
+	color: #fff;
+}
+
+/* VIEW ALL */
+.view-all-btn {
+	background: #6c757d;
+	color: #fff;
+	padding: 4px 12px;
+	border-radius: 20px;
+	font-size: 12px;
+	text-decoration: none;
+}
+
+/* BODY */
+.notice-body {
+	padding: 10px;
+}
+
+/* ITEM */
+.notice-item {
+	background: #E2E3E5;
+	padding: 12px;
+	border-radius: 8px;
+	margin-bottom: 10px;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	position: relative;
+}
+
+/* NEW BADGE */
+.new-badge {
+	position: relative;
+	width: 40px;
+	height: 40px;
+	background: #ff6b00;
+	color: #fff;
+	font-size: 10px;
+	font-weight: bold;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	line-height: 1;
+	clip-path: polygon(50% 0%, 60% 20%, 80% 10%, 75% 30%, 100% 35%, 80% 50%, 100% 65%,
+		75% 70%, 80% 90%, 60% 80%, 50% 100%, 40% 80%, 20% 90%, 25% 70%, 0% 65%
+		, 20% 50%, 0% 35%, 25% 30%, 20% 10%, 40% 20%);
+	flex-shrink: 0;
+}
+
+/* TEXT */
+.notice-text {
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+/* DOWNLOAD BUTTON */
+.download-btn {
+	background: #2f69b0;
+	color: #fff;
+	border-radius: 50%;
+	padding: 6px 8px;
+}
+
+/* MOBILE FIX */
+@media ( max-width : 576px) {
+	.notice-text {
+		font-size: 13px;
+	}
+}
+/* Card */
+.announcement-card {
+	border: none;
+	border-radius: 12px;
+	overflow: hidden;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Header */
+.announcement-header {
+	background: linear-gradient(45deg, #198754, #157347);
+	color: #fff;
+	font-weight: 600;
+	font-size: 18px;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 12px 16px;
+}
+
+.announcement-header .icon {
+	font-size: 20px;
+}
+
+/* Ticker box */
+.news-ticker {
+	background: #f8f9fa;
+	border-top: 1px solid #eee;
+	overflow: hidden;
+	position: relative;
+	padding: 10px 0;
+}
+
+/* Scrolling track */
+.news-track {
+	display: inline-flex;
+	white-space: nowrap;
+	animation: scroll-left 50s linear infinite;
+}
+
+/* News item */
+.news-item {
+	flex: 0 0 auto;
+	margin-right: 80px;
+	font-size: 15px;
+	color: #333;
+	transition: color 0.3s;
+}
+
+/* Hover effect */
+.news-item:hover {
+	color: #198754;
+	cursor: pointer;
+}
+
+/* Pause on hover */
+.news-ticker:hover .news-track {
+	animation-play-state: paused;
+}
+
+/* Animation */
+@keyframes scroll-left {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+</style>
 
 </head>
 
@@ -20,59 +209,67 @@
 	<%@ include file="header.jsp"%>
 
 	<!-- Carousel Start -->
-	<div class="container-fluid wow fadeIn" data-wow-delay="0.1s">
+	<div class="container-fluid wow fadeIn" data-wow-delay="0.02s">
 		<div id="header-carousel" class="carousel slide"
 			data-bs-ride="carousel">
 			<div class="carousel-inner">
 				<div class="carousel-item active">
 					<img
-						src="${pageContext.request.contextPath}/resources/img/mantri/punehome.png"
-						alt="Image" style="height: 450px; width: 100%;">
+						src="${pageContext.request.contextPath}/resources/img/topImages/punehome.png"
+						alt="Image">
 				</div>
+
 				<div class="carousel-item">
 					<img
-						src="${pageContext.request.contextPath}/resources/img/mantri/satarahome.jpg"
-						alt="Image" style="height: 450px; width: 100%;">
+						src="${pageContext.request.contextPath}/resources/img/topImages/gramImage1.jpeg"
+						alt="Image">
 				</div>
+
+				<div class="carousel-item">
+					<img
+						src="${pageContext.request.contextPath}/resources/img/topImages/gramImage2.jpeg"
+						alt="Image">
+				</div>
+
 			</div>
+
+			<!-- Controls (optional) -->
 			<button class="carousel-control-prev" type="button"
 				data-bs-target="#header-carousel" data-bs-slide="prev">
-				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-				<span class="visually-hidden">Previous</span>
+				<span class="carousel-control-prev-icon"></span>
 			</button>
 			<button class="carousel-control-next" type="button"
 				data-bs-target="#header-carousel" data-bs-slide="next">
-				<span class="carousel-control-next-icon" aria-hidden="true"></span>
-				<span class="visually-hidden">Next</span>
+				<span class="carousel-control-next-icon"></span>
 			</button>
 		</div>
 	</div>
 
 
-	<div class="container-fluid ">
-		<div class="card shadow-sm mt-3">
-			<div class="card-header bg-success text-white">
-				📢
-				<spring:message code="header.important_announcement" />
+	<div class="container-fluid">
+		<div class="card announcement-card mt-3">
+
+			<!-- Header -->
+			<div class="card-header announcement-header">
+				<span class="icon">📢</span> <span class="title"> <spring:message
+						code="header.important_announcement" />
+				</span>
 			</div>
-			<div class="text-scroll-box">
-				<div class="text-scroll-track scroll-active">
-					<div class="text-scroll-content">
-						<c:forEach var="dailyNews" items="${dailyNewsList}"
-							varStatus="status">
 
-							<span>${dailyNews.description}</span>
-						</c:forEach>
-					</div>
-					<div class="text-scroll-content">
-						<c:forEach var="dailyNews" items="${dailyNewsList}"
-							varStatus="status">
+			<!-- Ticker -->
+			<div class="news-ticker">
+				<div class="news-track">
+					<c:forEach var="dailyNews" items="${dailyNewsList}">
+						<span class="news-item">🔸 ${dailyNews.description}</span>
+					</c:forEach>
 
-							<span>${dailyNews.description}</span>
-						</c:forEach>
-					</div>
+					<!-- duplicate -->
+					<c:forEach var="dailyNews" items="${dailyNewsList}">
+						<span class="news-item">🔸 ${dailyNews.description}</span>
+					</c:forEach>
 				</div>
 			</div>
+
 		</div>
 	</div>
 
@@ -93,13 +290,63 @@
 							</h3>
 
 							<spring:message code="aboutus.para1" />
-							<a aria-label="अधिक वाचा … परिचय" title="अधिक वाचा …"
-								href="about"
-								class="btn btn-style-outline accent-color accent-border-color"><spring:message
-									code="home.more_read_on" /> …</a>
+							<a href="about"
+								class="btn btn-style-outline accent-color accent-border-color highlight-btn">
+								<b> <spring:message code="home.more_read_on" /></b> …
+							</a>
 						</div>
 
 					</div>
+
+					<br />
+
+					<div class="notice-section">
+
+						<!-- HEADER -->
+						<div
+							class="notice-header d-flex justify-content-between align-items-center">
+
+							<div class="d-flex align-items-center gap-2">
+								<div class="icon-box">
+									<i class="bi bi-file-earmark-text"></i>
+								</div>
+
+								<h5 class="mb-0 fw-bold">
+									<spring:message code="uploadPdf.downloads" />
+								</h5>
+							</div>
+
+							<a href="${pageContext.request.contextPath}/allPdfs"
+								class="view-all-btn"> <spring:message
+									code="uploadPdf.view_all" />
+							</a>
+
+						</div>
+
+
+						<div class="notice-body">
+
+							<c:forEach var="pdf" items="${pdfList}" varStatus="status">
+								<c:if test="${status.index < 4}">
+
+									<div class="notice-item">
+
+										<span class="new-badge">NEW</span>
+
+										<div class="notice-text">${pdf}</div>
+
+										<a href="${pageContext.request.contextPath}/files/${pdf}"
+											class="download-btn"> <i class="bi bi-download"></i>
+										</a>
+
+									</div>
+
+								</c:if>
+							</c:forEach>
+
+						</div>
+					</div>
+
 				</div>
 
 
@@ -107,7 +354,6 @@
 				<div class="col-lg-9 col-md-7 ">
 
 					<div class="row justify-content-center g-5 text-center">
-
 						<!-- Card 1 -->
 						<div class="col-lg-4 col-md-6">
 							<div class="profile-card">
@@ -228,27 +474,13 @@
 						<div class="col-lg-4 col-md-6">
 							<div class="profile-card">
 								<img
-									src="${pageContext.request.contextPath}/resources/img/mantri/d_sarpanch.jpg"
+									src="${pageContext.request.contextPath}/resources/img/mantri/d_sarpanch.jpeg"
 									class="profile-img">
 								<h5 class="mt-3 fw-bold">
 									<spring:message code="home.d_sarpanch_name" />
 								</h5>
 								<p class="text-muted mb-0">
 									<spring:message code="home.d_sarpanch_name_details" />
-								</p>
-							</div>
-						</div>
-						<!-- Card 7 -->
-						<div class="col-lg-4 col-md-6">
-							<div class="profile-card">
-								<img
-									src="${pageContext.request.contextPath}/resources/img/mantri/ceo.jpg"
-									class="profile-img">
-								<h5 class="mt-3 fw-bold">
-									<spring:message code="home.gramsevak_name" />
-								</h5>
-								<p class="text-muted mb-0">
-									<spring:message code="home.gramsevak_details" />
 								</p>
 							</div>
 						</div>
@@ -269,10 +501,15 @@
 				<div class="col-lg-5">
 
 
-					<h4 class="mb-3">कार्यक्रम / योजना</h4>
+					<h4 class="mb-3">
+						<spring:message code="header.program_event" />
+					</h4>
 					<ul class="text-dark text-decoration-none">
-						<li>२६ जानेवारी २०२६ प्रजासत्ताक दिन ठीक सकाळी ८.०० वा.</li>
-						<li>२६ जानेवारी २०२६ ग्रामसभा ठीक सकाळी १०.०० वा.</li>
+						<c:forEach var="programEvent" items="${programEventList}"
+							varStatus="status">
+							<li>${programEvent.description}</li>
+						</c:forEach>
+
 					</ul>
 
 				</div>
@@ -402,6 +639,14 @@
 							onclick="return confirm('You are being redirected to an external website. Please note that ग्रामपंचायत देऊळगाव गाडा cannot be held responsible for external websites content &amp; privacy policies.');"
 							rel="noopener noreferrer" class="dropdown-item"><spring:message
 									code="home.societies_work_distribution_system" /> </a></li>
+
+
+						<li><a href="https://bhulekh.mahabhumi.gov.in/" aria-label=""
+							target="_blank" style=""
+							onclick="return confirm('You are being redirected to an external website. Please note that ग्रामपंचायत देऊळगाव गाडा cannot be held responsible for external websites content &amp; privacy policies.');"
+							rel="noopener noreferrer" class="dropdown-item"><spring:message
+									code="home.bhulekh_mahabhumi" /> </a></li>
+
 					</ul>
 				</div>
 			</div>
@@ -456,6 +701,39 @@
 							</a> <a href="https://www.digilocker.gov.in" target="_blank"> <img
 								src="${pageContext.request.contextPath}/resources/img/digitalLogo/digilocker.png"
 								alt="digilocker" class="logo-xlarge">
+							</a> <a href="https://mahadbt.maharashtra.gov.in" target="_blank">
+								<img
+								src="${pageContext.request.contextPath}/resources/img/digitalLogo/mahadbt.png"
+								alt="India.gov.in" class="logo-xlarge">
+							</a> <a href="https://india.gov.in" target="_blank"> <img
+								src="${pageContext.request.contextPath}/resources/img/digitalLogo/india-gov.png"
+								alt="India.gov.in" class="logo-xlarge">
+							</a> <a href="https://www.mygov.in" target="_blank"> <img
+								src="${pageContext.request.contextPath}/resources/img/digitalLogo/mygov.png"
+								alt="MyGov" class="logo-xlarge">
+							</a> <a href="https://digitalindia.gov.in" target="_blank"> <img
+								src="${pageContext.request.contextPath}/resources/img/digitalLogo/digital-india.png"
+								alt="Digital India" class="logo-xlarge">
+							</a> <a href="https://web.umang.gov.in" target="_blank"> <img
+								src="${pageContext.request.contextPath}/resources/img/digitalLogo/umang.png"
+								alt="UMANG" class="logo-xlarge">
+							</a> <a href="https://uidai.gov.in" target="_blank"> <img
+								src="${pageContext.request.contextPath}/resources/img/digitalLogo/aadhaar.png"
+								alt="UIDAI" class="logo-xlarge">
+							</a> <a href="https://swachhbharatmission.ddws.gov.in"
+								target="_blank"> <img
+								src="${pageContext.request.contextPath}/resources/img/digitalLogo/swach-bharat.png"
+								alt="swach-bharat" class="logo-xlarge">
+							</a> <a href="https://nss.gov.in" target="_blank"> <img
+								src="${pageContext.request.contextPath}/resources/img/digitalLogo/national-service-scheme.png"
+								alt="nss" class="logo-xlarge">
+							</a> <a href="https://aaplesarkar.mahaonline.gov.in" target="_blank">
+								<img
+								src="${pageContext.request.contextPath}/resources/img/digitalLogo/aaplesarkar.png"
+								alt="aaplesarkar" class="logo-xlarge">
+							</a> <a href="https://www.digilocker.gov.in" target="_blank"> <img
+								src="${pageContext.request.contextPath}/resources/img/digitalLogo/digilocker.png"
+								alt="digilocker" class="logo-xlarge">
 							</a>
 						</div>
 					</div>
@@ -466,10 +744,11 @@
 
 
 	<!-- Back to Top -->
+	<!-- 
 	<a href="#"
 		class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i
 		class="bi bi-arrow-up"></i></a>
-
+ -->
 
 	<%@ include file="footer.jsp"%>
 	<script>
@@ -491,7 +770,20 @@
 		});
 	</script>
 
-
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "GovernmentOrganization",
+ "name": "Deulgaon Gada Gram Panchayat",
+ "url": "https://deulgaongada.com",
+ "address": {
+   "@type": "PostalAddress",
+   "addressLocality": "Deulgaon Gada",
+   "addressRegion": "Maharashtra",
+   "addressCountry": "India"
+ }
+}
+</script>
 </body>
 
 </html>

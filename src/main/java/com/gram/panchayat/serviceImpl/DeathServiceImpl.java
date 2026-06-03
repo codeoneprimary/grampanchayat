@@ -4,12 +4,17 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.gram.panchayat.common.ApiResponse;
 import com.gram.panchayat.common.GramPanchayatConstant;
 import com.gram.panchayat.dto.ApplicationStatusUpdateRequestDto;
 import com.gram.panchayat.dto.DeathCertificateApplicationRequestDto;
+import com.gram.panchayat.model.ContactNumber;
 import com.gram.panchayat.model.DeathApplication;
 import com.gram.panchayat.model.DeathCertificate;
 import com.gram.panchayat.model.User;
@@ -18,6 +23,7 @@ import com.gram.panchayat.repository.DeathCertificateRepository;
 import com.gram.panchayat.repository.UserRepository;
 import com.gram.panchayat.services.DeathService;
 import com.gram.panchayat.util.FileStorage;
+import com.gram.panchayat.util.WhatsAppUtil;
 
 @Service
 public class DeathServiceImpl implements DeathService {
@@ -26,12 +32,15 @@ public class DeathServiceImpl implements DeathService {
 	private final DeathCertificateRepository deathCertificateRepository;
 	private final FileStorage fileStorage;
 
+	private final WhatsAppUtil whatsAppUtil;
+
 	public DeathServiceImpl(UserRepository userRepository, DeathApplicationRepository deathApplicationRepository,
-			DeathCertificateRepository deathCertificateRepository, FileStorage fileStorage) {
+			DeathCertificateRepository deathCertificateRepository, FileStorage fileStorage, WhatsAppUtil whatsAppUtil) {
 		this.userRepository = userRepository;
 		this.deathApplicationRepository = deathApplicationRepository;
 		this.deathCertificateRepository = deathCertificateRepository;
 		this.fileStorage = fileStorage;
+		this.whatsAppUtil = whatsAppUtil;
 	}
 
 	@Override
@@ -72,6 +81,17 @@ public class DeathServiceImpl implements DeathService {
 		app.setStatus(GramPanchayatConstant.PENDING);
 		app.setApplicationDate(LocalDateTime.now());
 		deathApplicationRepository.save(app);
+		try {
+			ContactNumber contactNumber = new ContactNumber();
+			contactNumber.setContact(applicant.getMobileNo());
+			contactNumber.setName(applicant.getFullName());
+			String text = " your Death Certificate application (ID: "
+					+ app.getApplicationId()
+					+ ") has been successfully submitted. We will inform you once it is processed.";
+			whatsAppUtil.sendNewsToUser(contactNumber, text);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return new ApiResponse(true, "Death application submitted", app.getApplicationId());
 	}
 
@@ -96,7 +116,17 @@ public class DeathServiceImpl implements DeathService {
 			deathCertificate.setIssuedBy(admin.getUsername());
 			deathCertificateRepository.save(deathCertificate);
 		}
-
+		try {
+			ContactNumber contactNumber = new ContactNumber();
+			contactNumber.setContact(admin.getMobileNo());
+			contactNumber.setName(admin.getFullName());
+			String text =" the status of your Death Certificate application (ID: " + deathApplication.getApplicationId()
+					+ ") has been updated to " + deathApplication.getStatus()
+					+ ". Please check the system for details.";
+			whatsAppUtil.sendNewsToUser(contactNumber, text);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return new ApiResponse(true, "Death application status updated", deathApplication.getStatus());
 	}
 
@@ -117,11 +147,28 @@ public class DeathServiceImpl implements DeathService {
 		deathApplication.setStatus(status);
 		deathApplication.setStatusRemark(adminComment);
 		deathApplicationRepository.save(deathApplication);
+		try {
+			ContactNumber contactNumber = new ContactNumber();
+			contactNumber.setContact(deathApplication.getAppliedBy().getMobileNo());
+			contactNumber.setName(deathApplication.getAppliedBy().getFullName());
+			String text = " the status of your Death Certificate application (ID: " + deathApplication.getApplicationId()
+					+ ") has been updated to " + deathApplication.getStatus()
+					+ ". Please check the system for details.";
+			whatsAppUtil.sendNewsToUser(contactNumber, text);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public List<DeathApplication> findDeathApplicationUser(Long regUserId) {
 		User applicant = userRepository.findById(regUserId).orElseThrow(() -> new RuntimeException("User not found"));
 		return deathApplicationRepository.findByAppliedBy(applicant);
+	}
+
+	@Override
+	public Page<DeathApplication> findDeathApplicationByStatus(String status, int page, int size) {
+		Pageable pageable = PageRequest.of(page, size, Sort.by("applicationId").descending());
+		return deathApplicationRepository.findByStatus(status, pageable);
 	}
 }

@@ -1,6 +1,8 @@
 package com.gram.panchayat.model;
 
 import jakarta.persistence.*;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -19,10 +21,10 @@ public class DailyNews {
 	private String description;
 
 	@Column(name = "PUBLISH_FROM", nullable = false)
-	private LocalDateTime publishFrom;
+	private LocalDate publishFrom;
 
 	@Column(name = "PUBLISH_TO", nullable = false)
-	private LocalDateTime publishTo;
+	private LocalDate publishTo;
 
 	@Column(name = "STATUS", nullable = false, length = 20)
 	private String status; // DRAFT, PENDING, APPROVED, REJECTED, EXPIRED
@@ -65,19 +67,19 @@ public class DailyNews {
 		this.description = description;
 	}
 
-	public LocalDateTime getPublishFrom() {
+	public LocalDate getPublishFrom() {
 		return publishFrom;
 	}
 
-	public void setPublishFrom(LocalDateTime publishFrom) {
+	public void setPublishFrom(LocalDate publishFrom) {
 		this.publishFrom = publishFrom;
 	}
 
-	public LocalDateTime getPublishTo() {
+	public LocalDate getPublishTo() {
 		return publishTo;
 	}
 
-	public void setPublishTo(LocalDateTime publishTo) {
+	public void setPublishTo(LocalDate publishTo) {
 		this.publishTo = publishTo;
 	}
 

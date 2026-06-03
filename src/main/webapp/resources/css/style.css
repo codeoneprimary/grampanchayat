@@ -163,18 +163,49 @@ h5, .h5, h6, .h6, .fw-semi-bold {
 	border: 10px solid var(--primary);
 }
 
-@media ( max-width : 768px) {
-	#header-carousel .carousel-item {
-		position: relative;
-		min-height: 450px;
-	}
-	#header-carousel .carousel-item img {
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-	}
+/* ================================
+   HEADER CAROUSEL – FIXED RATIO
+   Works on Safari, iPhone, Chrome
+================================ */
+
+/* Carousel item container */
+#header-carousel .carousel-item {
+    width: 100%;
+    aspect-ratio: 29 / 9;          /* Same height on all screens */
+    overflow: hidden;
+    background-color: #000;        /* Fills space while image loads */
 }
+
+/* Carousel image */
+#header-carousel .carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;             /* Fill container */
+    object-position: center;       /* Crop from center */
+    display: block;
+}
+
+/* Optional: Improve smoothness in Safari */
+#header-carousel .carousel-item,
+#header-carousel .carousel-item img {
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+}
+
+/* Fallback for VERY old browsers */
+@supports not (aspect-ratio: 1 / 1) {
+    #header-carousel .carousel-item {
+        position: relative;
+        padding-top: 45%;          /* Approx 20:9 ratio */
+    }
+
+    #header-carousel .carousel-item img {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+}
+
 
 .page-header {
 	background: linear-gradient(rgba(15, 66, 41, .6), rgba(15, 66, 41, .6)),
@@ -762,3 +793,135 @@ a {
 		margin-left: 0; 
 	}
 }
+
+/* ==============================
+   WhatsApp Floating Button
+============================== */
+
+.whatsapp-float {
+    position: fixed;
+    bottom: 18px;
+    right: 18px;
+    width: 45px;              /* Button size */
+    height: 45px;
+    z-index: 9999;
+    border-radius: 50%;
+    background-color: #25D366; /* WhatsApp green */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Icon inside button */
+.whatsapp-float img {
+    width: 24px;   /* Icon size */
+    height: 24px;
+}
+
+/* Hover effect (desktop) */
+.whatsapp-float:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
+}
+
+/* Click effect */
+.whatsapp-float:active {
+    transform: scale(0.95);
+}
+
+/* Mobile adjustments */
+@media (max-width: 576px) {
+    .whatsapp-float {
+        width: 40px;
+        height: 40px;
+        bottom: 14px;
+        right: 14px;
+    }
+
+    .whatsapp-float img {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+/* Optional: pulse animation (attention effect) */
+@keyframes whatsapp-pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.6); }
+    70%  { box-shadow: 0 0 0 10px rgba(37, 211, 102, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
+.whatsapp-float {
+    animation: whatsapp-pulse 2.5s infinite;
+}
+
+/* ==============================
+   PORTFOLIO / GALLERY FIX
+   Prevent overlapping
+============================== */
+
+/* Grid item */
+.portfolio-item {
+    position: relative;          /* reset absolute positioning */
+    margin-bottom: 25px;
+}
+
+/* Inner wrapper */
+.portfolio-inner {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+/* Image styling */
+.portfolio-inner img {
+    width: 100%;
+    height: 260px;               /* SAME height for all images */
+    object-fit: cover;
+    display: block;
+}
+
+/* Overlay text */
+.portfolio-text {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.3s ease;
+}
+
+/* Show overlay on hover */
+.portfolio-inner:hover .portfolio-text {
+    opacity: 1;
+}
+
+/* Button */
+.portfolio-text .btn {
+    background: #fff;
+    color: #000;
+}
+
+/* Remove isotope/masonry absolute layout if applied */
+.portfolio-container {
+    position: static !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .portfolio-inner img {
+        height: 200px;
+    }
+}
+.home-link,
+.home-link:hover,
+.home-link:focus,
+.home-link:visited {
+    text-decoration: none;  /* removes underline */
+    color: inherit;         /* keeps original text color */
+}
+

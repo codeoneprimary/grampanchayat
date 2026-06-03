@@ -1,14 +1,27 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="s"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 
 <head>
 <meta charset="utf-8">
-<title><spring:message code="header.who_is_who" /></title>
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
-<meta content="" name="keywords">
-<meta content="" name="description">
+<link rel="icon" type="image/png" sizes="32x32"
+	href="${pageContext.request.contextPath}/resources/img/titleIcon.jpg">
+
+<link rel="apple-touch-icon"
+	href="${pageContext.request.contextPath}/resources/img/titleIcon.jpg">
+
+<spring:message code="header.who_is_who" var="pageTitle" />
+
+<c:set var="pageDescription"
+	value="Official website of Deulgaon Gada Gram Panchayat, Maharashtra. Access property tax, certificates, schemes, and village information. देऊळगाव गाडा ग्रामपंचायत सेवा व माहिती." />
+
+<c:set var="pageKeywords"
+	value="Deulgaon Gada, Deulgaon Gada Gram Panchayat, Maharashtra village, Gram Panchayat services, property tax Deulgaon Gada, देऊळगाव गाडा, देऊळगाव गाडा ग्रामपंचायत" />
+
 </head>
 
 <body>
@@ -53,12 +66,13 @@
 				<div class="col-lg-12 col-md-12">
 
 					<p>
-						<b><spring:message code="administrativeDepartment.introduction" /></b>
+						<b><spring:message
+								code="administrativeDepartment.introduction" /></b>
 					</p>
 					<p>
 						<spring:message code="administrativeDepartment.para1" />
 					</p>
-					
+
 				</div>
 			</div>
 		</div>

@@ -1,5 +1,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="s"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -7,10 +8,20 @@
 
 <head>
 <meta charset="utf-8">
-<title><spring:message code="header.helpline" /></title>
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
-<meta content="" name="keywords">
-<meta content="" name="description">
+<link rel="icon" type="image/png" sizes="32x32"
+	href="${pageContext.request.contextPath}/resources/img/titleIcon.jpg">
+
+<link rel="apple-touch-icon"
+	href="${pageContext.request.contextPath}/resources/img/titleIcon.jpg">
+
+<spring:message code="header.helpline" var="pageTitle" />
+
+<c:set var="pageDescription"
+	value="Official website of Deulgaon Gada Gram Panchayat, Maharashtra. Access property tax, certificates, schemes, and village information. देऊळगाव गाडा ग्रामपंचायत सेवा व माहिती." />
+
+<c:set var="pageKeywords"
+	value="Deulgaon Gada, Deulgaon Gada Gram Panchayat, Maharashtra village, Gram Panchayat services, property tax Deulgaon Gada, देऊळगाव गाडा, देऊळगाव गाडा ग्रामपंचायत" />
+
 </head>
 
 <body>
@@ -22,15 +33,16 @@
 		<div id="header-carousel" class="carousel slide"
 			data-bs-ride="carousel">
 			<div class="carousel-inner">
+
 				<div class="carousel-item active">
 					<img
-						src="${pageContext.request.contextPath}/resources/img/carousel-1.jpg"
-						alt="Image" style="height: 450px; width: 100%;">
+						src="${pageContext.request.contextPath}/resources/img/topImages/gramImage1.jpeg"
+						alt="Image">
 				</div>
 				<div class="carousel-item">
 					<img
-						src="${pageContext.request.contextPath}/resources/img/carousel-2.jpg"
-						alt="Image" style="height: 450px; width: 100%;">
+						src="${pageContext.request.contextPath}/resources/img/topImages/gramImage2.jpeg"
+						alt="Image">
 				</div>
 			</div>
 			<button class="carousel-control-prev" type="button"
@@ -54,13 +66,16 @@
 
 				<div class="col-lg-1"></div>
 				<div class="col-lg-10">
-					<table class="custom-table">
-						<caption>
-							<spring:message code="header.helpline" />
-						</caption>
-						<spring:message code="helpline.contact_details" />
 
-					</table>
+					<div class="table-container">
+						<table class="custom-table">
+							<caption>
+								<spring:message code="header.helpline" />
+							</caption>
+							<spring:message code="helpline.contact_details" />
+
+						</table>
+					</div>
 				</div>
 
 			</div>
@@ -69,10 +84,11 @@
 	</div>
 
 	<!-- Back to Top -->
+	<!-- 
 	<a href="#"
 		class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i
 		class="bi bi-arrow-up"></i></a>
-
+ -->
 
 	<%@ include file="footer.jsp"%>
 

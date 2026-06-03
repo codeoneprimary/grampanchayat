@@ -10,4 +10,10 @@ public interface DailyNewsService {
 
 	List<DailyNews> findDailyNews();
 
+	DailyNews getDailyNewsById(long id);
+
+	void deleteById(long id);
+
+	void sendMessageToUsers(DailyNews news);
+
 }

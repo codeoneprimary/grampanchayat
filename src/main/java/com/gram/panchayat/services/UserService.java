@@ -16,6 +16,10 @@ public interface UserService {
 
 	ApiResponse registerAdminUser(UserDto userDto);
 
-	ApiResponse sendUserOtp(String mobileNo);
+	ApiResponse sendUserOtp(String name, String mobileNo);
+
+	User findByUserId(Long userId);
+
+	Object updateUserDeatils(UserDto request,Long userId);
 
 }

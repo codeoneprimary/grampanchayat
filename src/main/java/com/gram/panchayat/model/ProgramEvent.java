@@ -1,0 +1,110 @@
+package com.gram.panchayat.model;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "programEvent")
+public class ProgramEvent {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID", unique = true, nullable = false)
+	private Long id;
+
+	@Column(name = "TITLE", nullable = false, length = 255)
+	private String title;
+
+	@Column(name = "DESCRIPTION", nullable = false, columnDefinition = "TEXT")
+	private String description;
+
+	@Column(name = "PUBLISH_FROM", nullable = false)
+	private LocalDate publishFrom;
+
+	@Column(name = "PUBLISH_TO", nullable = false)
+	private LocalDate publishTo;
+
+	@Column(name = "STATUS", nullable = false, length = 20)
+	private String status; // DRAFT, PENDING, APPROVED, REJECTED, EXPIRED
+
+	@Column(name = "CREATED_BY")
+	private Long createdBy;
+
+	@Column(name = "CREATED_DATE", updatable = false)
+	private LocalDateTime createdAt;
+
+	public ProgramEvent() {
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public LocalDate getPublishFrom() {
+		return publishFrom;
+	}
+
+	public void setPublishFrom(LocalDate publishFrom) {
+		this.publishFrom = publishFrom;
+	}
+
+	public LocalDate getPublishTo() {
+		return publishTo;
+	}
+
+	public void setPublishTo(LocalDate publishTo) {
+		this.publishTo = publishTo;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public Long getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(Long createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
+	}
+
+}

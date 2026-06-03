@@ -1,8 +1,12 @@
 @charset "UTF-8";
-
+.table-container {
+    width: 100%;
+overflow-x: visible;
+}
 /* Full Table Styling */
 .custom-table {
-	width: 100%;
+	width: 100%; 
+	min-width: 800px;
 	border-collapse: collapse;
 	font-family: Arial, sans-serif;
 	margin-top: 20px;
@@ -16,7 +20,8 @@
 	background-color: #fbac1b; /* Header blue */
 	color: white;
 	padding: 12px;
-	text-align: left;
+	/*text-align: left;
+	*/
 	font-size: 15px;
 }
 
@@ -41,7 +46,22 @@
 	border-bottom: 1px solid #ddd;
 	font-size: 14px;
 }
+/* Mobile only */
+@media (max-width: 768px) {
+    .table-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
 
+    .custom-table {
+        min-width: 800px; /* force scroll */
+    }
+
+    .custom-table th,
+    .custom-table td {
+        white-space: nowrap;
+    }
+}
 /* Optional Button Styling */
 .table-btn {
 	padding: 6px 12px;
@@ -163,4 +183,44 @@ table caption {
 	border: none;
 	border-top: 2px solid #0d6efd;
 	margin: 20px 0;
+}
+
+.highlight-btn {
+    background-color: #2e7d32;   /* Government style green */
+    border-color: #2e7d32 !important;
+    font-weight: 600;
+}
+
+.highlight-btn:hover {
+    background-color: #1b5e20;
+}
+
+#apiMessage {
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.success-msg {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.error-msg {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+.fixed-box {
+    width: 100%;
+    height: 250px;   /* Same height for all */
+    overflow: hidden;
+}
+
+.media-thumb {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;   /* Makes video behave like image */
 }

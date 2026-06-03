@@ -1,12 +1,27 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="s"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 
 <head>
 <meta charset="utf-8">
-<title><spring:message
-		code="header.death_certificate_application" /></title>
+<spring:message code="header.death_certificate_application" var="pageTitle" />
+
+<c:set var="pageDescription"
+value="Official website of Deulgaon Gada Gram Panchayat, Maharashtra. Access property tax, certificates, schemes, and village information. देऊळगाव गाडा ग्रामपंचायत सेवा व माहिती." />
+
+<c:set var="pageKeywords"
+value="Deulgaon Gada, Deulgaon Gada Gram Panchayat, Maharashtra village, Gram Panchayat services, property tax Deulgaon Gada, देऊळगाव गाडा, देऊळगाव गाडा ग्रामपंचायत" />
+		
+<link rel="icon" type="image/png" sizes="32x32"
+      href="${pageContext.request.contextPath}/resources/img/titleIcon.jpg">
+
+<link rel="apple-touch-icon"
+      href="${pageContext.request.contextPath}/resources/img/titleIcon.jpg">
+		
 
 <style>
 .card-header {
@@ -87,25 +102,41 @@ label::after {
 						<div class="col-md-2">
 							<label for="age"> <spring:message
 									code="death.application.age" />
-							</label> <input type="number" class="form-control" id="age" name="age"
-								required>
+							</label> <input type="text" class="form-control" id="age" name="age"
+								readonly>
 						</div>
 
 						<div class="col-md-3">
 							<label for="dateOfBirth"> <spring:message
 									code="dob.application.date_of_birth" />
 							</label> <input type="date" class="form-control" id="dateOfBirth"
-								name="dateOfBirth">
+								name="dateOfBirth" onchange="calculateAge()" required>
 						</div>
 
 						<div class="col-md-3">
 							<label for="dateOfDeath"> <spring:message
 									code="death.application.date_of_death" />
 							</label> <input type="date" class="form-control" id="dateOfDeath"
-								name="dateOfDeath" max="<%=java.time.LocalDate.now()%>" required>
+								name="dateOfDeath" max="<%=java.time.LocalDate.now()%>" onchange="calculateAge()" required>
 							<div class="invalid-feedback">
 								<spring:message code="death.application.date_of_death_required" />
 							</div>
+						</div>
+						
+
+						<div class="col-md-3">
+							<label for="causeOfDeath"> <spring:message
+									code="death.application.cause_of_death" />
+							</label> <input type="text" class="form-control" id="causeOfDeath"
+								name="causeOfDeath" required>
+						</div>
+						
+
+						<div class="col-md-3">
+							<label for="placeOfDeath"> <spring:message
+									code="death.application.place_of_death" />
+							</label> <input type="text" class="form-control" id="placeOfDeath"
+								name="placeOfDeath" required>
 						</div>
 					</div>
 
@@ -288,12 +319,24 @@ label::after {
     let finalData = {};
 
     // Auto calculate age
-    document.getElementById("dateOfBirth").addEventListener("change", function () {
-        const dob = new Date(this.value);
-        const diff = Date.now() - dob.getTime();
-        const age = new Date(diff).getUTCFullYear() - 1970;
-        if (age > 0) document.getElementById("age").value = age;
-    });
+function calculateAge() {
+    var dob = document.getElementById("dateOfBirth").value;
+    var dod = document.getElementById("dateOfDeath").value;
+
+    if (!dob) return;
+
+    var birthDate = new Date(dob);
+    var endDate = dod ? new Date(dod) : new Date();
+
+    var age = endDate.getFullYear() - birthDate.getFullYear();
+    var m = endDate.getMonth() - birthDate.getMonth();
+
+    if (m < 0 || (m === 0 && endDate.getDate() < birthDate.getDate())) {
+        age--;
+    }
+
+    document.getElementById("age").value = age ;
+}
 
     // Verify button
     verifyBtn.onclick = () => {

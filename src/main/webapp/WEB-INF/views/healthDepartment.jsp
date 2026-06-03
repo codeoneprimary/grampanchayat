@@ -8,53 +8,59 @@
 
 <head>
 <meta charset="utf-8">
-<title><spring:message code="header.health_department" /></title>
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
-<meta content="" name="keywords">
-<meta content="" name="description">
+<link rel="icon" type="image/png" sizes="32x32"
+	href="${pageContext.request.contextPath}/resources/img/titleIcon.jpg">
+
+<link rel="apple-touch-icon"
+	href="${pageContext.request.contextPath}/resources/img/titleIcon.jpg">
+
+<spring:message code="header.health_department" var="pageTitle" />
+
+<c:set var="pageDescription"
+	value="Official website of Deulgaon Gada Gram Panchayat, Maharashtra. Access property tax, certificates, schemes, and village information. देऊळगाव गाडा ग्रामपंचायत सेवा व माहिती." />
+
+<c:set var="pageKeywords"
+	value="Deulgaon Gada, Deulgaon Gada Gram Panchayat, Maharashtra village, Gram Panchayat services, property tax Deulgaon Gada, देऊळगाव गाडा, देऊळगाव गाडा ग्रामपंचायत" />
+
 </head>
 
 <body>
 
 	<%@ include file="header.jsp"%>
 
+
+	<!-- Carousel Start -->
 	<div class="container-fluid wow fadeIn" data-wow-delay="0.1s">
 		<div id="header-carousel" class="carousel slide"
 			data-bs-ride="carousel">
 			<div class="carousel-inner">
 				<div class="carousel-item active">
 					<img
-						src="${pageContext.request.contextPath}/resources/img/arogyavibhag/arogyavibhag1.jpg"
-						alt="Image" style="height: 450px; width: 100%;">
-				</div>
-
-				<div class="carousel-item ">
-					<img
-						src="${pageContext.request.contextPath}/resources/img/arogyavibhag/arogyavibhag2.jpg"
-						alt="Image" style="height: 450px; width: 100%;">
-				</div>
-
-				<div class="carousel-item ">
-					<img
-						src="${pageContext.request.contextPath}/resources/img/arogyavibhag/arogyavibhag3.jpg"
-						alt="Image" style="height: 450px; width: 100%;">
+						src="${pageContext.request.contextPath}/resources/img/arogyavibhag/arogyavibhag3.jpeg"
+						alt="Image">
 				</div>
 
 				<div class="carousel-item">
 					<img
-						src="${pageContext.request.contextPath}/resources/img/arogyavibhag/arogyavibhag4.jpg"
-						alt="Image" style="height: 450px; width: 100%;">
+						src="${pageContext.request.contextPath}/resources/img/arogyavibhag/arogyavibhag1.jpeg"
+						alt="Image">
+				</div>
+
+				<div class="carousel-item">
+					<img
+						src="${pageContext.request.contextPath}/resources/img/arogyavibhag/arogyavibhag2.jpeg"
+						alt="Image">
 				</div>
 			</div>
+
+			<!-- Controls (optional) -->
 			<button class="carousel-control-prev" type="button"
 				data-bs-target="#header-carousel" data-bs-slide="prev">
-				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-				<span class="visually-hidden">Previous</span>
+				<span class="carousel-control-prev-icon"></span>
 			</button>
 			<button class="carousel-control-next" type="button"
 				data-bs-target="#header-carousel" data-bs-slide="next">
-				<span class="carousel-control-next-icon" aria-hidden="true"></span>
-				<span class="visually-hidden">Next</span>
+				<span class="carousel-control-next-icon"></span>
 			</button>
 		</div>
 	</div>
@@ -134,32 +140,6 @@
 
 	</div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	<div class="container-fluid py-5">
 		<div class="container">
 			<div class="row gx-0">
@@ -172,8 +152,7 @@
 								<i class="fa fa-user-md text-primary"></i>
 							</div>
 							<div class="ps-3">
-								<h4>दैनंदिन ओपीडी</h4>
-								<span> सकाळी 10 ते दुपारी 1</span>
+								<spring:message code="health_department.opd" />
 							</div>
 						</div>
 					</div>
@@ -186,8 +165,8 @@
 								<i class="fa fa-syringe text-primary"></i>
 							</div>
 							<div class="ps-3">
-								<h4>नियमित लसीकरण</h4>
-								<span>दर महिन्याच्या पहिल्या सोमवार</span>
+
+								<spring:message code="health_department.lasikaran" />
 							</div>
 						</div>
 					</div>
@@ -200,8 +179,8 @@
 								<i class="fa fa-notes-medical text-primary"></i>
 							</div>
 							<div class="ps-3">
-								<h4>एनसीडी शिबिर</h4>
-								<span>आठवड्यातून एकदा</span>
+
+								<spring:message code="health_department.shibir1" />
 							</div>
 						</div>
 					</div>
@@ -214,8 +193,7 @@
 								<i class="fas fa-eye text-primary"></i>
 							</div>
 							<div class="ps-3">
-								<h4>नेत्र तपासणी शिबिर</h4>
-								<span>महिन्यातून एकदा</span>
+								<spring:message code="health_department.shibir2" />
 							</div>
 						</div>
 					</div>
@@ -230,8 +208,7 @@
 								<i class="fas fa-stethoscope text-primary"></i>
 							</div>
 							<div class="ps-3">
-								<h4>एएनसी शिबिर</h4>
-								<span>महिन्यातून एकदा</span>
+								<spring:message code="health_department.shibir3" />
 							</div>
 						</div>
 					</div>
@@ -249,85 +226,36 @@
 				<div class="col-lg-6">
 					<div class="row g-4 align-items-center">
 
-						<table class="custom-table">
-							<caption>
-								<spring:message code="health_department.available_services" />
-							</caption>
-							<spring:message code="health_department.available_services_list" />
+						<div class="table-container">
+							<table class="custom-table">
+								<caption>
+									<spring:message code="health_department.available_services" />
+								</caption>
+								<spring:message code="health_department.available_services_list" />
 
-						</table>
-
+							</table>
+						</div>
 					</div>
 				</div>
 
 				<div class="col-lg-6">
 					<div class="row g-4 align-items-center">
 
-						<table class="custom-table">
-							<caption>
-								<spring:message code="health_department.staff" />
-							</caption>
-							<spring:message code="health_department.staff_list" />
+						<div class="table-container">
+							<table class="custom-table">
+								<caption>
+									<spring:message code="health_department.staff" />
+								</caption>
+								<spring:message code="health_department.staff_list" />
 
-						</table>
-
+							</table>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<!-- Features End -->
-
-
-
-
-
-	<!-- Features Start -->
-	<div class="container-xxl py-5">
-		<div class="container">
-			<div class="row g-5 align-items-center">
-				<div class="col-lg-12">
-					<div class="row g-4 align-items-center">
-
-						<div class="row g-4">
-							<div class="col-4 wow fadeIn" data-wow-delay="0.3s">
-								<div class="text-center rounded py-5 px-4"
-									style="box-shadow: 0 0 45px rgba(0, 0, 0, .08);">
-									<div class="btn-square bg-light rounded-circle mx-auto mb-4"
-										style="width: 90px; height: 90px;">
-										<i class="fa fa-check fa-3x text-primary"></i>
-									</div>
-									<h4 class="mb-0">100% Satisfaction</h4>
-								</div>
-							</div>
-							<div class="col-4 wow fadeIn" data-wow-delay="0.5s">
-								<div class="text-center rounded py-5 px-4"
-									style="box-shadow: 0 0 45px rgba(0, 0, 0, .08);">
-									<div class="btn-square bg-light rounded-circle mx-auto mb-4"
-										style="width: 90px; height: 90px;">
-										<i class="fa fa-users fa-3x text-primary"></i>
-									</div>
-									<h4 class="mb-0">Dedicated Team</h4>
-								</div>
-							</div>
-
-							<div class="col-4 wow fadeIn" data-wow-delay="0.5s">
-								<div class="text-center rounded py-5 px-4"
-									style="box-shadow: 0 0 45px rgba(0, 0, 0, .08);">
-									<div class="btn-square bg-light rounded-circle mx-auto mb-4"
-										style="width: 90px; height: 90px;">
-										<i class="fa fa-tools fa-3x text-primary"></i>
-									</div>
-									<h4 class="mb-0">Modern Equipment</h4>
-								</div>
-							</div>
-						</div>
-
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 
 	<div class="container-xxl py-5">
 		<div class="container">
@@ -338,11 +266,13 @@
 
 		</div>
 	</div>
+
 	<!-- Back to Top -->
+	<!-- 
 	<a href="#"
 		class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i
 		class="bi bi-arrow-up"></i></a>
-
+ -->
 
 	<%@ include file="footer.jsp"%>
 

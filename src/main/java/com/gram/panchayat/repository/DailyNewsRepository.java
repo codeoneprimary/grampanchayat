@@ -1,6 +1,6 @@
 package com.gram.panchayat.repository;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -17,6 +17,6 @@ public interface DailyNewsRepository extends JpaRepository<DailyNews, Long> {
 			    AND :now BETWEEN n.publishFrom AND n.publishTo
 			    ORDER BY n.publishFrom DESC
 			""")
-	List<DailyNews> findTodaysActiveNews(@Param("now") LocalDateTime now);
-	
+	List<DailyNews> findTodaysActiveNews(@Param("now") LocalDate now);
+
 }

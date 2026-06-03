@@ -1,15 +1,28 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title><spring:message
-		code="header.death_certificate_application" /></title>
+<spring:message code="header.death_certificate_application"
+	var="pageTitle" />
+
+<c:set var="pageDescription"
+	value="Official website of Deulgaon Gada Gram Panchayat, Maharashtra. Access property tax, certificates, schemes, and village information. देऊळगाव गाडा ग्रामपंचायत सेवा व माहिती." />
+
+<c:set var="pageKeywords"
+	value="Deulgaon Gada, Deulgaon Gada Gram Panchayat, Maharashtra village, Gram Panchayat services, property tax Deulgaon Gada, देऊळगाव गाडा, देऊळगाव गाडा ग्रामपंचायत" />
+
+<link rel="icon" type="image/png" sizes="32x32"
+	href="${pageContext.request.contextPath}/resources/img/titleIcon.jpg">
+
+<link rel="apple-touch-icon"
+	href="${pageContext.request.contextPath}/resources/img/titleIcon.jpg">
+
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -22,6 +35,14 @@
 .detail-table th {
 	width: 30%;
 	background-color: #f8f9fa;
+}
+.table.detail-table th,
+.table.detail-table td {
+    border: none !important;
+}
+
+.table.detail-table {
+    border: 3px solid #000 !important;
 }
 </style>
 </head>
@@ -48,19 +69,48 @@
 					<tr>
 						<th><spring:message code="death.application.name_of_deceased" /></th>
 						<td>${application.deceasedName}</td>
+						<th><spring:message code="death.application.aadhar_card_no" /></th>
+						<td>${application.aadharCardNo}</td>
 					</tr>
+
 					<tr>
 						<th><spring:message code="dob.application.gender" /></th>
 						<td>${application.gender}</td>
+						<th><spring:message code="death.application.age" /></th>
+						<td>${application.age}</td>
 					</tr>
+
 					<tr>
+						<th><spring:message code="dob.application.date_of_birth" /></th>
+						<td>${application.dateOfBirth}</td>
 						<th><spring:message code="death.application.date_of_death" /></th>
 						<td>${application.dateOfDeath}</td>
 					</tr>
+
+
 					<tr>
 						<th><spring:message code="death.application.cause_of_death" /></th>
 						<td>${application.causeOfDeath}</td>
 					</tr>
+
+				</table>
+				<table class="table table-bordered detail-table">
+					<tr>
+						<th><spring:message code="death.application.informant_name" /></th>
+						<td>${application.informantName}</td>
+					</tr>
+					<tr>
+						<th><spring:message code="death.application.relation" /></th>
+						<td>${application.relation}</td>
+						<th><spring:message code="dob.application.mobile_no" /></th>
+						<td>${application.mobileNo}</td>
+					</tr>
+					<tr>
+						<th><spring:message code="dob.application.address" /></th>
+						<td>${application.address},${application.district},
+							${application.state}, ${application.pincode}</td>
+					</tr>
+
 					<tr>
 						<th><spring:message code="application_list.status" /></th>
 						<td><span
@@ -94,7 +144,7 @@
 
 								<div class="mb-3">
 									<label class="form-label"><spring:message
-											code="application_details.select_statuss" /></label> <select
+											code="application_details.select_status" /></label> <select
 										name="status" class="form-select" required>
 										<option value="PENDING"
 											${application.status == 'PENDING' ? 'selected' : ''}>Pending</option>

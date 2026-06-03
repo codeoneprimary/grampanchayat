@@ -1,5 +1,7 @@
 package com.gram.panchayat.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,6 +21,7 @@ import jakarta.servlet.http.HttpSession;
 @RequestMapping("/api/citizenuser")
 public class CitizenAuthController {
 
+	private static final Logger logger = LoggerFactory.getLogger(CitizenAuthController.class);
 	private final UserService userService;
 	private final OtpService otpService;
 
@@ -37,12 +40,13 @@ public class CitizenAuthController {
 	public ResponseEntity<ApiResponse> createUser(@RequestBody UserDto userDto) {
 		userDto.setUserRole(GramPanchayatConstant.CITIZEN);
 		ApiResponse apiResponse = userService.registerUser(userDto);
+		logger.info("succesfully user registred"+userDto.getMobileNo());
 		return ResponseEntity.ok(apiResponse);
 	}
 
 	@PostMapping("/sendRegisterOtp")
 	public ApiResponse sendRegisterOtp(@RequestParam String mobileNo, HttpSession session) {
-		ApiResponse apiResponse = userService.sendUserOtp(mobileNo);
+		ApiResponse apiResponse = userService.sendUserOtp("User",mobileNo);
 		return apiResponse;
 
 	}

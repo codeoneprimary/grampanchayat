@@ -15,22 +15,22 @@
 					<spring:message code="header.grampanchayat_address" />
 				</p>
 				<p class="mb-2">
-					<i class="fa fa-phone-alt me-3"></i>+012 345 67890
+					<i class="fa fa-envelope me-3"></i>deulgaongadagram@gmail.com
 				</p>
-				<p class="mb-2">
-					<i class="fa fa-envelope me-3"></i>info@example.com
-				</p>
-
 
 				<div class="d-flex pt-2">
 					<a class="btn btn-square btn-outline-light rounded-circle me-2"
-						href=""><i class="fab fa-twitter"></i></a> <a
+						href="https://x.com/tutordotcom"><i class="fab fa-twitter"></i></a> <a
 						class="btn btn-square btn-outline-light rounded-circle me-2"
-						href=""><i class="fab fa-facebook-f"></i></a> <a
+						href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a> <a
 						class="btn btn-square btn-outline-light rounded-circle me-2"
-						href=""><i class="fab fa-youtube"></i></a> <a
-						class="btn btn-square btn-outline-light rounded-circle me-2"
-						href=""><i class="fab fa-linkedin-in"></i></a>
+						href="https://www.youtube.com/"><i class="fab fa-youtube"></i></a> 
+				</div>
+
+				<div class="d-flex pt-2">
+					<div style="text-align: center; margin-top: 10px;">
+					<i id="eyeIcon" class="fa fa-eye"></i> <spring:message code="total_visitors" />:<%@ include file="visitorCount.jsp"%>
+					</div>
 				</div>
 			</div>
 			<div class="col-lg-4 col-md-6">
@@ -39,33 +39,33 @@
 					<spring:message code="header.department" />
 				</h4>
 
-				<a class="dropdown-item" href="healthDepartment"><spring:message
+				<a class="dropdown-item" href="${pageContext.request.contextPath}/healthDepartment"><spring:message
 						code="header.health_department" /></a> <a class="dropdown-item "
-					href="administrativeDepartment"><spring:message
+					href="${pageContext.request.contextPath}/administrativeDepartment"><spring:message
 						code="header.administrative_department" /></a> <a
-					class="dropdown-item " href="agricultureDepartment"><spring:message
+					class="dropdown-item " href="${pageContext.request.contextPath}/agricultureDepartment"><spring:message
 						code="header.agriculture_department" /></a> <a class="dropdown-item "
-					href="animalHusbandryDepartment"><spring:message
+					href="${pageContext.request.contextPath}/animalHusbandryDepartment"><spring:message
 						code="header.animal_husbandry_department" /></a> <a
-					class="dropdown-item" href="educationDepartment"><spring:message
+					class="dropdown-item" href="${pageContext.request.contextPath}/educationDepartment"><spring:message
 						code="header.education_department" /></a> <a class="dropdown-item "
-					href="ruralWaterSupplyDepartment"><spring:message
+					href="${pageContext.request.contextPath}/ruralWaterSupplyDepartment"><spring:message
 						code="header.rural_water_supply_department" /></a> <a
-					class="dropdown-item " href="swachhBharatMission"><spring:message
+					class="dropdown-item " href="${pageContext.request.contextPath}/swachhBharatMission"><spring:message
 						code="header.swachh_bharat_mission" /></a>
 
 			</div>
 			<div class="col-lg-4 col-md-6">
-				<h4 class="text-white mb-4">Other link</h4>
-				<a class="dropdown-item" href="about"><spring:message
+				<h4 class="text-white mb-4"><spring:message code="other_link" /></h4>
+				<a class="dropdown-item" href="${pageContext.request.contextPath}/about"><spring:message
 						code="header.parichay" /></a> <a class="dropdown-item "
-					href="visionAndMission"><spring:message
+					href="${pageContext.request.contextPath}/visionAndMission"><spring:message
 						code="header.vision_mission" /></a> <a class="dropdown-item "
-					href="objectivesAndFunctions"><spring:message
+					href="${pageContext.request.contextPath}/objectivesAndFunctions"><spring:message
 						code="header.objectives_functions" /></a> <a class="dropdown-item "
-					href="administrativeStructure"><spring:message
+					href="${pageContext.request.contextPath}/administrativeStructure"><spring:message
 						code="header.administrative_structure" /></a><a
-					class="dropdown-item " href="contact"><spring:message
+					class="dropdown-item " href="${pageContext.request.contextPath}/contact"><spring:message
 						code="header.contact" /></a>
 			</div>
 		</div>

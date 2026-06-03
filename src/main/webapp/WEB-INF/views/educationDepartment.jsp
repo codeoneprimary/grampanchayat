@@ -1,14 +1,27 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="s"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 
 <head>
 <meta charset="utf-8">
-<title><spring:message code="header.education_department" /></title>
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
-<meta content="" name="keywords">
-<meta content="" name="description">
+<link rel="icon" type="image/png" sizes="32x32"
+	href="${pageContext.request.contextPath}/resources/img/titleIcon.jpg">
+
+<link rel="apple-touch-icon"
+	href="${pageContext.request.contextPath}/resources/img/titleIcon.jpg">
+
+<spring:message code="header.education_department" var="pageTitle" />
+
+<c:set var="pageDescription"
+	value="Official website of Deulgaon Gada Gram Panchayat, Maharashtra. Access property tax, certificates, schemes, and village information. देऊळगाव गाडा ग्रामपंचायत सेवा व माहिती." />
+
+<c:set var="pageKeywords"
+	value="Deulgaon Gada, Deulgaon Gada Gram Panchayat, Maharashtra village, Gram Panchayat services, property tax Deulgaon Gada, देऊळगाव गाडा, देऊळगाव गाडा ग्रामपंचायत" />
+
 </head>
 
 <body>
@@ -20,15 +33,23 @@
 		<div id="header-carousel" class="carousel slide"
 			data-bs-ride="carousel">
 			<div class="carousel-inner">
+
 				<div class="carousel-item active">
 					<img
-						src="${pageContext.request.contextPath}/resources/img/carousel-1.jpg"
-						alt="Image" style="height: 450px; width: 100%;">
+						src="${pageContext.request.contextPath}/resources/img/school/zpprimarySchool.jpeg"
+						alt="Image">
 				</div>
+
 				<div class="carousel-item">
 					<img
-						src="${pageContext.request.contextPath}/resources/img/carousel-2.jpg"
-						alt="Image" style="height: 450px; width: 100%;">
+						src="${pageContext.request.contextPath}/resources/img/school/sadguruhighSchool.jpeg"
+						alt="Image">
+				</div>
+
+				<div class="carousel-item">
+					<img
+						src="${pageContext.request.contextPath}/resources/img/school/aanganwadi.jpeg"
+						alt="Image">
 				</div>
 			</div>
 			<button class="carousel-control-prev" type="button"
@@ -54,8 +75,14 @@
 					<p>
 						<spring:message code="aboutus.schools_details" />
 					</p>
+				</div>
 
+				<div class="col-lg-12 col-md-12">
+					<spring:message code="education_department.teacherDetails" />
+				</div>
 
+				<div class="col-lg-12 col-md-12">
+					<spring:message code="education_department.teacherNames" />
 				</div>
 			</div>
 		</div>
@@ -63,41 +90,35 @@
 	</div>
 
 
-	<!-- Facts Start -->
-	<div class="container-fluid facts my-5 py-5" data-parallax="scroll"
-		data-image-src="${pageContext.request.contextPath}/resources/img/carousel-1.jpg">
-		<div class="container py-5">
-			<div class="row g-5">
-				<div class="col-sm-6 col-lg-3 text-center wow fadeIn"
-					data-wow-delay="0.1s">
-					<h1 class="display-4 text-white" data-toggle="counter-up">1234</h1>
-					<span class="fs-5 fw-semi-bold text-light">Happy Clients</span>
-				</div>
-				<div class="col-sm-6 col-lg-3 text-center wow fadeIn"
-					data-wow-delay="0.3s">
-					<h1 class="display-4 text-white" data-toggle="counter-up">1234</h1>
-					<span class="fs-5 fw-semi-bold text-light">Garden Complated</span>
-				</div>
-				<div class="col-sm-6 col-lg-3 text-center wow fadeIn"
-					data-wow-delay="0.5s">
-					<h1 class="display-4 text-white" data-toggle="counter-up">1234</h1>
-					<span class="fs-5 fw-semi-bold text-light">Dedicated Staff</span>
-				</div>
-				<div class="col-sm-6 col-lg-3 text-center wow fadeIn"
-					data-wow-delay="0.7s">
-					<h1 class="display-4 text-white" data-toggle="counter-up">1234</h1>
-					<span class="fs-5 fw-semi-bold text-light">Awards Achieved</span>
-				</div>
+	<div class="container-xxl py-5">
+		<div class="container">
+			<div class="row g-4">
+
+				<c:forEach var="i" begin="1" end="21">
+
+					<div class="col-lg-4 col-md-6 portfolio-item wow fadeInUp">
+
+						<a
+							href="${pageContext.request.contextPath}/resources/img/school/${i}.jpeg"
+							data-lightbox="portfolio"> <img class="img-fluid"
+							src="${pageContext.request.contextPath}/resources/img/school/${i}.jpeg"
+							alt="Gallery Image ${i}">
+						</a>
+
+					</div>
+
+				</c:forEach>
+
 			</div>
 		</div>
 	</div>
-	<!-- Facts End -->
-
 
 	<!-- Back to Top -->
+	<!-- 
 	<a href="#"
 		class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i
 		class="bi bi-arrow-up"></i></a>
+ -->
 
 
 	<%@ include file="footer.jsp"%>

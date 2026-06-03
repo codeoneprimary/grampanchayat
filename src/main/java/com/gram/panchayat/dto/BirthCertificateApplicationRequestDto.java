@@ -6,6 +6,7 @@ public class BirthCertificateApplicationRequestDto {
 	private String childName;
 	private String dateOfBirth;
 	private String placeOfBirth;
+	private String hospitalName;
 	private String fatherName;
 	private String motherName;
 	private String gender;
@@ -13,8 +14,27 @@ public class BirthCertificateApplicationRequestDto {
 	private String state;
 	private String district;
 	private String pincode;
+	private String mobileNo;
 
+	private String email;
+	
 	private DocumentDto doctorCertificate;
+
+	public String getMobileNo() {
+		return mobileNo;
+	}
+
+	public void setMobileNo(String mobileNo) {
+		this.mobileNo = mobileNo;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 	public Long getUserId() {
 		return userId;
@@ -110,6 +130,14 @@ public class BirthCertificateApplicationRequestDto {
 
 	public void setPincode(String pincode) {
 		this.pincode = pincode;
+	}
+
+	public String getHospitalName() {
+		return hospitalName;
+	}
+
+	public void setHospitalName(String hospitalName) {
+		this.hospitalName = hospitalName;
 	}
 
 }

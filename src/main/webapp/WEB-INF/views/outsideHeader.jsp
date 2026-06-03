@@ -1,20 +1,27 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="s"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
-<title>Gardener - Gardening Website Template</title>
+<link rel="icon" type="image/png" sizes="32x32"
+      href="${pageContext.request.contextPath}/resources/img/titleIcon.jpg">
+
+<link rel="apple-touch-icon"
+      href="${pageContext.request.contextPath}/resources/img/titleIcon.jpg">
+
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <meta content="" name="keywords">
 <meta content="" name="description">
 
-<!-- Favicon -->
-<link
-	href="${pageContext.request.contextPath}/resources/img/favicon.ico"
-	rel="icon">
+<link rel="icon" type="image/png" sizes="32x32"
+      href="${pageContext.request.contextPath}/resources/img/titleIcon.png">
+
+<link rel="apple-touch-icon"
+      href="${pageContext.request.contextPath}/resources/img/titleIcon.png">
 
 <!-- Google Web Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">

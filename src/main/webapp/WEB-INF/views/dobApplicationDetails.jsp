@@ -1,15 +1,27 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title><spring:message
-		code="header.birth_certificate_application" /></title>
+<spring:message code="header.birth_certificate_application"
+	var="pageTitle" />
+
+<c:set var="pageDescription"
+	value="Official website of Deulgaon Gada Gram Panchayat, Maharashtra. Access property tax, certificates, schemes, and village information. देऊळगाव गाडा ग्रामपंचायत सेवा व माहिती." />
+
+<c:set var="pageKeywords"
+	value="Deulgaon Gada, Deulgaon Gada Gram Panchayat, Maharashtra village, Gram Panchayat services, property tax Deulgaon Gada, देऊळगाव गाडा, देऊळगाव गाडा ग्रामपंचायत" />
+
+<link rel="icon" type="image/png" sizes="32x32"
+	href="${pageContext.request.contextPath}/resources/img/titleIcon.jpg">
+
+<link rel="apple-touch-icon"
+	href="${pageContext.request.contextPath}/resources/img/titleIcon.jpg">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -22,6 +34,14 @@
 .detail-table th {
 	width: 30%;
 	background-color: #f8f9fa;
+}
+
+.table.detail-table th, .table.detail-table td {
+	border: none !important;
+}
+
+.table.detail-table {
+	border: 3px solid #000 !important;
 }
 </style>
 </head>
@@ -48,15 +68,46 @@
 					<tr>
 						<th><spring:message code="dob.application.child_name" /></th>
 						<td>${application.childName}</td>
-					</tr>
-					<tr>
-						<th><spring:message code="dob.application.father_name" /></th>
-						<td>${application.fatherName}</td>
+						<th><spring:message code="dob.application.gender" /></th>
+						<td>${application.gender}</td>
 					</tr>
 					<tr>
 						<th><spring:message code="dob.application.date_of_birth" /></th>
 						<td>${application.dateOfBirth}</td>
+						<th><spring:message code="dob.application.place_of_birth" /></th>
+						<td>${application.placeOfBirth}</td>
 					</tr>
+
+					<tr>
+						<th><spring:message code="dob.application.hospital_name" /></th>
+						<td>${application.hospitalName}</td>
+					</tr>
+
+				</table>
+
+				<table class="table table-bordered detail-table">
+
+					<tr>
+						<th><spring:message code="dob.application.father_name" /></th>
+						<td>${application.fatherName}</td>
+						<th><spring:message code="dob.application.mother_name" /></th>
+						<td>${application.motherName}</td>
+					</tr>
+					<tr>
+						<th><spring:message code="dob.application.mobile_no" /></th>
+						<td>${application.mobileNo}</td>
+						<th><spring:message code="dob.application.email" /></th>
+						<td>${application.email}</td>
+					</tr>
+
+
+					<tr>
+						<th><spring:message code="dob.application.address_details" /></th>
+						<td>${application.address},${application.district}</td>
+						<td>${application.state}</td>
+						<td>${application.pincode}</td>
+					</tr>
+
 					<tr>
 						<th><spring:message code="application_list.status" /></th>
 						<td><span
@@ -66,7 +117,7 @@
                                   'bg-warning'}">
 								${application.status} </span></td>
 					</tr>
-					
+
 					<tr>
 						<th><spring:message code="application_details.admin_remark" /></th>
 						<td>${application.statusRemark}</td>

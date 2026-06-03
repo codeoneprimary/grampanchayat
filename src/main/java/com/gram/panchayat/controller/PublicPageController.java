@@ -1,10 +1,14 @@
 package com.gram.panchayat.controller;
 
+import java.io.File;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.gram.panchayat.services.DailyNewsService;
+import com.gram.panchayat.services.ProgramEventService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -12,23 +16,37 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class PublicPageController {
 
+	@Value("${pdf.upload.path}")
+	private String UPLOAD_DIR;
 	private final DailyNewsService dailyNewsService;
 
-	public PublicPageController(DailyNewsService dailyNewsService) {
+	private final ProgramEventService programEventService;
+
+	public PublicPageController(DailyNewsService dailyNewsService, ProgramEventService programEventService) {
 		this.dailyNewsService = dailyNewsService;
+		this.programEventService = programEventService;
 	}
 
 	@GetMapping("/")
 	public String index(Model model) {
 
+		File folder = new File(UPLOAD_DIR);
+		String[] files = folder.list((dir, name) -> name.toLowerCase().endsWith(".pdf"));
+		
+		model.addAttribute("pdfList", files);
 		model.addAttribute("dailyNewsList", dailyNewsService.findDailyNews());
+		model.addAttribute("programEventList", programEventService.findActiveProgramEvent());
 		return "home";
 	}
 
 	@GetMapping("/home")
 	public String home(Model model) {
-
+		File folder = new File(UPLOAD_DIR);
+		String[] files = folder.list((dir, name) -> name.toLowerCase().endsWith(".pdf"));
+		
+		model.addAttribute("pdfList", files);
 		model.addAttribute("dailyNewsList", dailyNewsService.findDailyNews());
+		model.addAttribute("programEventList", programEventService.findActiveProgramEvent());
 		return "home";
 	}
 
@@ -37,9 +55,14 @@ public class PublicPageController {
 		return "about";
 	}
 
-	@GetMapping("/history")
-	public String history() {
-		return "history";
+	@GetMapping("/pilgrimageSite")
+	public String pilgrimageSite() {
+		return "pilgrimageSite";
+	}
+
+	@GetMapping("/sarpanchHistory")
+	public String sarpanchHistory() {
+		return "sarpanchHistory";
 	}
 
 	@GetMapping("/contact")
@@ -156,5 +179,15 @@ public class PublicPageController {
 		}
 
 		return "redirect:/home";
+	}
+
+	@GetMapping("/complaintForm")
+	public String complaintForm() {
+		return "complaintForm";
+	}
+
+	@GetMapping("/houseRent")
+	public String houseRent() {
+		return "houseRent";
 	}
 }

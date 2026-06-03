@@ -1,15 +1,26 @@
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="s"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
 <meta charset="utf-8">
-<title>Gardener - Gardening Website Template</title>
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
-<meta content="" name="keywords">
-<meta content="" name="description">
+<link rel="icon" type="image/png" sizes="32x32"
+	href="${pageContext.request.contextPath}/resources/img/titleIcon.jpg">
 
+<link rel="apple-touch-icon"
+	href="${pageContext.request.contextPath}/resources/img/titleIcon.jpg">
+
+<spring:message code="header.schemes" var="pageTitle" />
+
+<c:set var="pageDescription"
+value="Official website of Deulgaon Gada Gram Panchayat, Maharashtra. Access property tax, certificates, schemes, and village information. देऊळगाव गाडा ग्रामपंचायत सेवा व माहिती." />
+
+<c:set var="pageKeywords"
+value="Deulgaon Gada, Deulgaon Gada Gram Panchayat, Maharashtra village, Gram Panchayat services, property tax Deulgaon Gada, देऊळगाव गाडा, देऊळगाव गाडा ग्रामपंचायत" />
 
 </head>
 
@@ -18,147 +29,175 @@
 	<%@ include file="header.jsp"%>
 
 
-	<!-- Page Header Start -->
-	<div class="container-fluid page-header py-5 mb-5 wow fadeIn"
-		data-wow-delay="0.1s">
-		<div class="container text-center py-5">
-			<h1 class="display-3 text-white mb-4 animated slideInDown">Services</h1>
-			<nav aria-label="breadcrumb animated slideInDown">
-				<ol class="breadcrumb justify-content-center mb-0">
-					<li class="breadcrumb-item"><a href="#">Home</a></li>
-					<li class="breadcrumb-item"><a href="#">Pages</a></li>
-					<li class="breadcrumb-item active" aria-current="page">Services</li>
-				</ol>
-			</nav>
+	<!-- Carousel Start -->
+	<div class="container-fluid wow fadeIn" data-wow-delay="0.1s">
+		<div id="header-carousel" class="carousel slide"
+			data-bs-ride="carousel">
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+					<img
+						src="${pageContext.request.contextPath}/resources/img/arogyavibhag/arogyavibhag3.jpeg"
+						alt="Image">
+				</div>
+
+				<div class="carousel-item">
+					<img
+						src="${pageContext.request.contextPath}/resources/img/arogyavibhag/arogyavibhag1.jpeg"
+						alt="Image">
+				</div>
+
+				<div class="carousel-item">
+					<img
+						src="${pageContext.request.contextPath}/resources/img/arogyavibhag/arogyavibhag2.jpeg"
+						alt="Image">
+				</div>
+			</div>
+
+			<!-- Controls (optional) -->
+			<button class="carousel-control-prev" type="button"
+				data-bs-target="#header-carousel" data-bs-slide="prev">
+				<span class="carousel-control-prev-icon"></span>
+			</button>
+			<button class="carousel-control-next" type="button"
+				data-bs-target="#header-carousel" data-bs-slide="next">
+				<span class="carousel-control-next-icon"></span>
+			</button>
 		</div>
 	</div>
-	<!-- Page Header End -->
 
 
-	<!-- Service Start -->
+
+	<div class="container-xxl py-5">
+		<div class="container" style="text-align: justify;">
+			<div class="row g-5">
+
+				<div class="col-lg-12 col-md-12">
+
+					<h3>
+						<spring:message code="current_schemes_name_card1" />
+					</h3>
+					<p>
+						<spring:message code="current_schemes_link_card1" />
+					</p>
+					<p>
+						<spring:message code="current_schemes_text_card1" />
+					</p>
+
+					<h3>
+						<spring:message code="current_schemes_name_card2" />
+					</h3>
+					<p>
+						<spring:message code="current_schemes_link_card2" />
+					</p>
+					<p>
+						<spring:message code="current_schemes_text_card2" />
+					</p>
+
+					<h3>
+						<spring:message code="current_schemes_name_card3" />
+					</h3>
+					<p>
+						<spring:message code="current_schemes_link_card3" />
+					</p>
+					<p>
+						<spring:message code="current_schemes_text_card3" />
+					</p>
+
+					<h3>
+						<spring:message code="current_schemes_name_card4" />
+					</h3>
+					<p>
+						<spring:message code="current_schemes_link_card4" />
+					</p>
+					<p>
+						<spring:message code="current_schemes_text_card4" />
+					</p>
+
+					<h3>
+						<spring:message code="current_schemes_name_card5" />
+					</h3>
+					<p>
+						<spring:message code="current_schemes_link_card5" />
+					</p>
+					<p>
+						<spring:message code="current_schemes_text_card5" />
+					</p>
+
+					<h3>
+						<spring:message code="current_schemes_name_card6" />
+					</h3>
+					<p>
+						<spring:message code="current_schemes_link_card6" />
+					</p>
+					<p>
+						<spring:message code="current_schemes_text_card6" />
+					</p>
+
+					<h3>
+						<spring:message code="current_schemes_name_card7" />
+					</h3>
+					<p>
+						<spring:message code="current_schemes_link_card7" />
+					</p>
+					<p>
+						<spring:message code="current_schemes_text_card7" />
+					</p>
+
+					<h3>
+						<spring:message code="current_schemes_name_card8" />
+					</h3>
+					<p>
+						<spring:message code="current_schemes_link_card8" />
+					</p>
+					<p>
+						<spring:message code="current_schemes_text_card8" />
+					</p>
+
+					<h3>
+						<spring:message code="current_schemes_name_card9" />
+					</h3>
+					<p>
+						<spring:message code="current_schemes_link_card9" />
+					</p>
+					<p>
+						<spring:message code="current_schemes_text_card9" />
+					</p>
+
+					<h3>
+						<spring:message code="current_schemes_name_card10" />
+					</h3>
+					<p>
+						<spring:message code="current_schemes_link_card10" />
+					</p>
+					<p>
+						<spring:message code="current_schemes_text_card10" />
+					</p>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+
 	<div class="container-xxl py-5">
 		<div class="container">
-			<div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s"
-				style="max-width: 500px;">
-				<p class="fs-5 fw-bold text-primary">Our Services</p>
-				<h1 class="display-5 mb-5">Services That We Offer For You</h1>
+
+			<div class="row g-5 align-items-center">
+				<div class="col-lg-6 wow fadeInUp"></div>
 			</div>
-			<div class="row g-4">
-				<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-					<div class="service-item rounded d-flex h-100">
-						<div class="service-img rounded">
-							<img class="img-fluid" src="${pageContext.request.contextPath}/resources/img/service-1.jpg" alt="">
-						</div>
-						<div class="service-text rounded p-5">
-							<div class="btn-square rounded-circle mx-auto mb-3">
-								<img class="img-fluid" src="${pageContext.request.contextPath}/resources/img/icon/icon-3.png" alt="Icon">
-							</div>
-							<h4 class="mb-3">Landscaping</h4>
-							<p class="mb-4">Erat ipsum justo amet duo et elitr dolor, est
-								duo duo eos lorem sed diam stet diam sed stet.</p>
-							<a class="btn btn-sm" href=""><i
-								class="fa fa-plus text-primary me-2"></i>Read More</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-					<div class="service-item rounded d-flex h-100">
-						<div class="service-img rounded">
-							<img class="img-fluid" src="${pageContext.request.contextPath}/resources/img/service-2.jpg" alt="">
-						</div>
-						<div class="service-text rounded p-5">
-							<div class="btn-square rounded-circle mx-auto mb-3">
-								<img class="img-fluid" src="${pageContext.request.contextPath}/resources/img/icon/icon-6.png" alt="Icon">
-							</div>
-							<h4 class="mb-3">Pruning plants</h4>
-							<p class="mb-4">Erat ipsum justo amet duo et elitr dolor, est
-								duo duo eos lorem sed diam stet diam sed stet.</p>
-							<a class="btn btn-sm" href=""><i
-								class="fa fa-plus text-primary me-2"></i>Read More</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-					<div class="service-item rounded d-flex h-100">
-						<div class="service-img rounded">
-							<img class="img-fluid" src="img/service-3.jpg" alt="">
-						</div>
-						<div class="service-text rounded p-5">
-							<div class="btn-square rounded-circle mx-auto mb-3">
-								<img class="img-fluid" src="img/icon/icon-5.png" alt="Icon">
-							</div>
-							<h4 class="mb-3">Irrigation & Drainage</h4>
-							<p class="mb-4">Erat ipsum justo amet duo et elitr dolor, est
-								duo duo eos lorem sed diam stet diam sed stet.</p>
-							<a class="btn btn-sm" href=""><i
-								class="fa fa-plus text-primary me-2"></i>Read More</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-					<div class="service-item rounded d-flex h-100">
-						<div class="service-img rounded">
-							<img class="img-fluid" src="img/service-4.jpg" alt="">
-						</div>
-						<div class="service-text rounded p-5">
-							<div class="btn-square rounded-circle mx-auto mb-3">
-								<img class="img-fluid" src="${pageContext.request.contextPath}/resources/img/icon/icon-4.png" alt="Icon">
-							</div>
-							<h4 class="mb-3">Garden Maintenance</h4>
-							<p class="mb-4">Erat ipsum justo amet duo et elitr dolor, est
-								duo duo eos lorem sed diam stet diam sed stet.</p>
-							<a class="btn btn-sm" href=""><i
-								class="fa fa-plus text-primary me-2"></i>Read More</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-					<div class="service-item rounded d-flex h-100">
-						<div class="service-img rounded">
-							<img class="img-fluid" src="${pageContext.request.contextPath}/resources/img/service-5.jpg" alt="">
-						</div>
-						<div class="service-text rounded p-5">
-							<div class="btn-square rounded-circle mx-auto mb-3">
-								<img class="img-fluid" src="${pageContext.request.contextPath}/resources/img/icon/icon-8.png" alt="Icon">
-							</div>
-							<h4 class="mb-3">Green Technology</h4>
-							<p class="mb-4">Erat ipsum justo amet duo et elitr dolor, est
-								duo duo eos lorem sed diam stet diam sed stet.</p>
-							<a class="btn btn-sm" href=""><i
-								class="fa fa-plus text-primary me-2"></i>Read More</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-					<div class="service-item rounded d-flex h-100">
-						<div class="service-img rounded">
-							<img class="img-fluid" src="${pageContext.request.contextPath}/resources/img/service-6.jpg" alt="">
-						</div>
-						<div class="service-text rounded p-5">
-							<div class="btn-square rounded-circle mx-auto mb-3">
-								<img class="img-fluid" src="${pageContext.request.contextPath}/resources/img/icon/icon-2.png" alt="Icon">
-							</div>
-							<h4 class="mb-3">Urban Gardening</h4>
-							<p class="mb-4">Erat ipsum justo amet duo et elitr dolor, est
-								duo duo eos lorem sed diam stet diam sed stet.</p>
-							<a class="btn btn-sm" href=""><i
-								class="fa fa-plus text-primary me-2"></i>Read More</a>
-						</div>
-					</div>
-				</div>
-			</div>
+
 		</div>
 	</div>
-	<!-- Service End -->
-
-
 	<!-- Back to Top -->
+	<!-- 
 	<a href="#"
 		class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i
 		class="bi bi-arrow-up"></i></a>
+ -->
 
 	<%@ include file="footer.jsp"%>
 
 </body>
-
+<style>
+</style>
 </html>

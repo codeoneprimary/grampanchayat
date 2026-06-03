@@ -2,6 +2,8 @@ package com.gram.panchayat.services;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+
 import com.gram.panchayat.common.ApiResponse;
 import com.gram.panchayat.dto.ApplicationStatusUpdateRequestDto;
 import com.gram.panchayat.dto.BirthCertificateApplicationRequestDto;
@@ -20,5 +22,7 @@ public interface DobService {
 	void updateDobApplicationStatus(Long applicationId, String status, String adminComment);
 
 	List<DobApplication> findDobApplicationByUser(Long regUserId);
+
+	Page<DobApplication> findDobApplicationByStatus(String status, int page, int size);
 
 }

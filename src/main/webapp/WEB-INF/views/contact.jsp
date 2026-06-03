@@ -1,81 +1,95 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="s"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 
 <head>
 <meta charset="utf-8">
-<title><spring:message code="header.home" /></title>
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
-<meta content="" name="keywords">
-<meta content="" name="description">
+<link rel="icon" type="image/png" sizes="32x32"
+	href="${pageContext.request.contextPath}/resources/img/titleIcon.jpg">
+
+<link rel="apple-touch-icon"
+	href="${pageContext.request.contextPath}/resources/img/titleIcon.jpg">
+
+<spring:message code="header.contact" var="pageTitle" />
+
+<c:set var="pageDescription"
+	value="Official website of Deulgaon Gada Gram Panchayat, Maharashtra. Access property tax, certificates, schemes, and village information. देऊळगाव गाडा ग्रामपंचायत सेवा व माहिती." />
+
+<c:set var="pageKeywords"
+	value="Deulgaon Gada, Deulgaon Gada Gram Panchayat, Maharashtra village, Gram Panchayat services, property tax Deulgaon Gada, देऊळगाव गाडा, देऊळगाव गाडा ग्रामपंचायत" />
+
 </head>
 
 <body>
 
 	<%@ include file="header.jsp"%>
 
-	<!-- Page Header Start -->
-	<div class="container-fluid page-header py-5 mb-5 wow fadeIn"
-		data-wow-delay="0.1s">
-		<div class="container text-center py-5">
-			<h1 class="display-3 text-white mb-4 animated slideInDown">Contact
-				Us</h1>
-			<nav aria-label="breadcrumb animated slideInDown">
-				<ol class="breadcrumb justify-content-center mb-0">
-					<li class="breadcrumb-item"><a href="#">Home</a></li>
-					<li class="breadcrumb-item"><a href="#">Pages</a></li>
-					<li class="breadcrumb-item active" aria-current="page">Contact</li>
-				</ol>
-			</nav>
-		</div>
-	</div>
-	<!-- Page Header End -->
-
-
 	<!-- Contact Start -->
 	<div class="container-xxl py-5">
 		<div class="container">
 			<div class="row g-5">
 				<div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
-					<p class="fs-5 fw-bold text-primary">Contact Us</p>
-					<h1 class="display-5 mb-5"><spring:message code="header.village_name" /></h1>
-				
+					<p class="fs-5 fw-bold text-primary">
+						<spring:message code="header.contact" />
+					</p>
+					<h1 class="display-5 mb-5">
+						<spring:message code="header.village_name" />
+					</h1>
 
-					<form>
+
+
+					<form id="complaintForm">
 						<div class="row g-3">
-							<div class="col-md-6">
+							<div class="col-md-12">
 								<div class="form-floating">
-									<input type="text" class="form-control" id="name"
-										placeholder="Your Name"> <label for="name">Your
-										Name</label>
+									<input type="text" class="form-control" id="fullName"
+										name="fullName" placeholder="Your Name" required> <label
+										for="name"><spring:message code="contactus.name" />*</label>
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-floating">
-									<input type="email" class="form-control" id="email"
-										placeholder="Your Email"> <label for="email">Your
-										Email</label>
+									<input type="text" class="form-control" id="mobile"
+										name="mobile" placeholder="Your mobile" maxlength="10"
+										pattern="[0-9]{10}" required> <label for="mobile"><spring:message
+											code="contactus.mobile" />*</label>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-floating">
+									<input type="email" class="form-control" id="email" name="email"
+										placeholder="Your Email"> <label for="email"><spring:message
+											code="contactus.email" /></label>
 								</div>
 							</div>
 							<div class="col-12">
 								<div class="form-floating">
-									<input type="text" class="form-control" id="subject"
-										placeholder="Subject"> <label for="subject">Subject</label>
+									<input type="text" class="form-control" id="complaintType" name="complaintType"
+										placeholder="Subject" required> <label for="subject"><spring:message
+											code="contactus.subject" />*</label>
 								</div>
 							</div>
 							<div class="col-12">
 								<div class="form-floating">
 									<textarea class="form-control"
-										placeholder="Leave a message here" id="message"
-										style="height: 100px"></textarea>
-									<label for="message">Message</label>
+										placeholder="Leave a message here" id="details" name="details"
+										style="height: 100px" required></textarea>
+									<label for="message"><spring:message
+											code="contactus.message" />*</label>
 								</div>
 							</div>
 							<div class="col-12">
-								<button class="btn btn-primary py-3 px-4" type="submit">Send
-									Message</button>
+								<button type="button" id="submitBtn"
+									class="btn btn-success btn-lg px-5 rounded-pill shadow-sm">
+									<spring:message code="msg.submit" />
+								</button>
 							</div>
+
+							<div id="msg" class="text-center text-danger fw-semibold"></div>
 						</div>
 					</form>
 				</div>
@@ -93,13 +107,43 @@
 	</div>
 	<!-- Contact End -->
 
-
 	<!-- Back to Top -->
+	<!-- 
 	<a href="#"
 		class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i
 		class="bi bi-arrow-up"></i></a>
+ -->
 
 	<%@ include file="footer.jsp"%>
+	<script>
+	submitBtn.onclick = () => {
+
+	    const form = document.getElementById("complaintForm");
+
+	    if (!form.checkValidity()) {
+	        form.classList.add("was-validated");
+	        return;
+	    }
+
+	    const formData = new FormData(form);
+
+	    fetch("<%=request.getContextPath()%>/api/complaint/add", {
+	        method: "POST",
+	        body: formData
+	    })
+	    .then(res => res.json())
+	    .then(response => {
+	        document.getElementById("msg").innerHTML =
+	            "<div class='alert alert-success'>Contact Submitted Successfully ✅</div>";
+	        form.reset();
+	    })
+	    .catch(err => {
+	        document.getElementById("msg").innerHTML =
+	            "<div class='alert alert-danger'>Error ❌</div>";
+	    });
+	};
+</script>
+
 </body>
 
 </html>

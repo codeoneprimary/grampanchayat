@@ -8,7 +8,16 @@
 <html lang="mr">
 <head>
 <meta charset="UTF-8">
-<title><spring:message code="header.applicationAcknowledgment" /></title>
+<spring:message code="header.applicationAcknowledgment" var="pageTitle" />
+
+<c:set var="pageDescription"
+value="Official website of Deulgaon Gada Gram Panchayat, Maharashtra. Access property tax, certificates, schemes, and village information. देऊळगाव गाडा ग्रामपंचायत सेवा व माहिती." />
+
+<link rel="icon" type="image/png" sizes="32x32"
+      href="${pageContext.request.contextPath}/resources/img/titleIcon.jpg">
+
+<link rel="apple-touch-icon"
+      href="${pageContext.request.contextPath}/resources/img/titleIcon.jpg">
 
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
@@ -188,7 +197,7 @@ body {
 					onclick="window.print()"><spring:message code="acknowledgment.print" /></button>
 
 				<a href="<c:url value='/' />" class="btn btn-secondary px-4 ms-2">
-					<spring:message code="acknowledgment.home" /> </a>
+					<spring:message code="header.home" /> </a>
 			</div>
 
 		</div>

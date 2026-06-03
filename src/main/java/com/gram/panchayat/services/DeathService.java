@@ -2,6 +2,8 @@ package com.gram.panchayat.services;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+
 import com.gram.panchayat.common.ApiResponse;
 import com.gram.panchayat.dto.ApplicationStatusUpdateRequestDto;
 import com.gram.panchayat.dto.DeathCertificateApplicationRequestDto;
@@ -20,4 +22,6 @@ public interface DeathService {
 	void updateDeathApplicationStatus(Long applicationId, String status, String adminComment);
 
 	List<DeathApplication> findDeathApplicationUser(Long regUserId);
+
+	Page<DeathApplication> findDeathApplicationByStatus(String status, int page, int size);
 }

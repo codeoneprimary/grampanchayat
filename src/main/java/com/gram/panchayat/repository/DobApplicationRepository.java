@@ -2,6 +2,8 @@ package com.gram.panchayat.repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.gram.panchayat.model.DobApplication;
@@ -14,5 +16,7 @@ public interface DobApplicationRepository extends JpaRepository<DobApplication, 
 	List<DobApplication> findByStatus(String status);
 
 	List<DobApplication> findByAppliedBy(User appliedBy);
+
+	Page<DobApplication> findByStatus(String status, Pageable pageable);
 
 }

@@ -1,161 +1,194 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="s"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 
 <head>
 <meta charset="utf-8">
-<title><spring:message code="login.title" /></title>
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
-<meta content="" name="keywords">
-<meta content="" name="description">
+<link rel="icon" type="image/png" sizes="32x32"
+	href="${pageContext.request.contextPath}/resources/img/titleIcon.jpg">
+
+<link rel="apple-touch-icon"
+	href="${pageContext.request.contextPath}/resources/img/titleIcon.jpg">
+
+<spring:message code="login.title" var="pageTitle" />
+
+<c:set var="pageDescription"
+	value="Official website of Deulgaon Gada Gram Panchayat, Maharashtra. Access property tax, certificates, schemes, and village information. देऊळगाव गाडा ग्रामपंचायत सेवा व माहिती." />
+
+<c:set var="pageKeywords"
+	value="Deulgaon Gada, Deulgaon Gada Gram Panchayat, Maharashtra village, Gram Panchayat services, property tax Deulgaon Gada, देऊळगाव गाडा, देऊळगाव गाडा ग्रामपंचायत" />
+
+<style type="text/css">
+.login-wrapper {
+	background: linear-gradient(135deg, #e6effa, #c7daf3);
+	min-height: 100vh;
+}
+
+.login-card {
+	border-radius: 12px;
+	transition: 0.3s;
+}
+
+.login-card:hover {
+	transform: translateY(-3px);
+}
+
+.instruction-card {
+	background: #f8f9fa;
+	border-radius: 10px;
+}
+
+.instruction-list {
+	padding-left: 18px;
+	color: #555;
+}
+
+.instruction-list li {
+	margin-bottom: 8px;
+}
+
+.form-control:focus {
+	border-color: #2f69b0;
+	box-shadow: 0 0 0 0.2rem rgba(47, 105, 176, 0.2);
+}
+</style>
 
 </head>
 <body>
 
 	<%@ include file="header.jsp"%>
 
-	<div class="container my-4">
-		<div class="row justify-content-center">
-			<div class="col-lg-3 col-md-11 col-12">
+	<div class="login-wrapper">
 
-				<div class="card shadow">
+		<div class="container py-5">
+			<div class="row justify-content-center align-items-center">
 
-					<div class="card-body">Some Details</div>
-				</div>
-			</div>
-			<div class="col-lg-9 col-md-11 col-12">
+				<!-- 🔐 LEFT LOGIN -->
+				<div class="col-lg-5 col-md-8 col-12">
 
-				<div class="card shadow">
+					<div class="card shadow-lg border-0 login-card">
 
-					<div class="card-body">
+						<div class="card-body p-4">
 
-						<h4>
-							<spring:message code="login.applicant_login_here" />
-						</h4>
-						<div class="row g-3">
+							<h4 class="text-center fw-bold text-primary mb-4">
+								🔐
+								<spring:message code="login.applicant_login_here" />
+							</h4>
 
-							<div class="col-md-6 col-12">
-								<div class="card-body">
+							<!-- MOBILE -->
+							<div class="mb-3">
+								<label class="form-label fw-semibold"> <spring:message
+										code="dob.application.mobile_no" /> *
+								</label> <input type="text" id="mobileNo"
+									class="form-control form-control-lg" maxlength="10"
+									placeholder="Enter mobile number"> <small
+									id="mobileError" class="text-danger"></small>
+							</div>
 
-									<div class="row g-3">
-										<div class="col-md-11 col-12">
-											<label class="form-label" for="mobileNo"><spring:message
-													code="dob.application.mobile_no" /></label> <input type="text"
-												name="mobileNo" id="mobileNo" class="form-control"
-												maxlength="10" pattern="[0-9]{10}" required>
+							<!-- OTP SECTION -->
+							<div id="otpDiv" style="display: none;">
 
-											<p id="mobileError" class="text-danger"></p>
-										</div>
-									</div>
+								<div class="mb-3">
+									<label class="form-label fw-semibold"> <spring:message
+											code="login.enter_otp" /> *
+									</label> <input type="text" id="otp"
+										class="form-control form-control-lg"> <small
+										id="otpError" class="text-danger"></small>
 
-									<div id="otpDiv" style="display: none;">
-
-										<div class="row g-3">
-											<div class="col-md-11 col-12">
-												<label class="form-label"><spring:message
-														code="login.enter_otp" /></label> <input type="text" name="otp"
-													id="otp" class="form-control" maxlength="10"
-													pattern="[0-9]{10}" required>
-
-												<p id="otpError" class="text-danger"></p>
-												<button type="button" id="resendOtpButton"
-													class="btn btn-link p-0" style="display: none;"
-													onclick="sendOtp()">
-													<spring:message code="login.resend_otp" />
-												</button>
-												<span id="timer" class="text-danger ms-2"></span>
-											</div>
-										</div>
-
-										<div class="row g-3">
-
-											<label class="form-label"></label>
-											<div class="col-md-5 col-12">
-												<input type="text" id="captcha" class="form-control"
-													placeholder="Enter Captcha" required />
-											</div>
-
-											<div class="col-md-6 col-12">
-												<img src="captcha" id="captchaImg" /> <a href="#"
-													onclick="refreshCaptcha()"><spring:message
-														code="login.refresh" /></a>
-											</div>
-
-											<p id="captchaError" class="text-danger"></p>
-										</div>
-
-										<p id="errorMsg" class="text-danger mt-2"
-											style="display: none;"></p>
-										<div class="text-center mt-4" id="verifyOtpButton">
-											<button type="button" class="btn btn-success mt-2"
-												onclick="verifyOtp()">
-												<spring:message code="login.verify_otp" />
-											</button>
-											<span class="spinner-border spinner-border-sm d-none"
-												role="status" aria-hidden="true"></span>
-										</div>
-									</div>
-
-									<!-- Buttons -->
-									<div class="text-center mt-4" id="sendOtpButton">
-										<a href="home">
-											<button type="button" id="verifyBtn" class="btn btn-primary">
-												<spring:message code="msg.back" />
-											</button>
-										</a>
-										<button type="button" class="btn btn-success"
+									<div class="mt-1">
+										<button type="button" id="resendOtpButton"
+											class="btn btn-link p-0" style="display: none;"
 											onclick="sendOtp()">
-											<spring:message code="msg.submit" />
+											<spring:message code="login.resend_otp" />
 										</button>
-										<span class="spinner-border spinner-border-sm d-none"
-											role="status" aria-hidden="true"></span>
+										<span id="timer" class="text-danger ms-2"></span>
+									</div>
+								</div>
+
+								<!-- CAPTCHA -->
+								<div class="mb-3">
+									<label class="form-label fw-semibold">Captcha *</label>
+
+									<div class="d-flex align-items-center gap-2">
+										<input type="text" id="captcha" class="form-control"
+											placeholder="Enter Captcha"> <img src="captcha"
+											id="captchaImg" height="45" />
+
+										<button class="btn btn-outline-secondary btn-sm"
+											onclick="refreshCaptcha()">↻</button>
 									</div>
 
+									<small id="captchaError" class="text-danger"></small>
 								</div>
+
+								<!-- VERIFY BUTTON -->
+								<div class="text-center mt-3" id="verifyOtpButton">
+									<button type="button" class="btn btn-success w-100"
+										onclick="verifyOtp()">
+										<spring:message code="login.verify_otp" />
+									</button>
+								</div>
+
 							</div>
 
-							<div class="col-md-6 col-12">
-								<div class="card-body" style="border: 1px solid #ced4da;">
+							<!-- ACTION BUTTONS -->
+							<div class="text-center mt-4" id="sendOtpButton">
 
-									<div class="row g-3">
-										<div class="col-md-11 col-12">
-											<h5>Instructions</h5>
+								<a href="${pageContext.request.contextPath}/home" class="btn btn-outline-secondary me-2"> ⬅ <spring:message
+										code="msg.back" />
+								</a>
 
-											<ul class="fa-ul">
-												<li><span class="fa-li"> <i
-														class="fas fa-landmark text-success"></i>
-												</span> Enter your registered Mobile</li>
-												<li><span class="fa-li"> <i
-														class="fas fa-landmark text-success"></i>
-												</span>Click on Login button for get OTP</li>
-												<li><span class="fa-li"> <i
-														class="fas fa-landmark text-success"></i>
-												</span> Enter OTP which is recived in mobile no</li>
-												<li><span class="fa-li"> <i
-														class="fas fa-landmark text-success"></i>
-												</span>Enter the security text shown in the image</li>
-												<li><span class="fa-li"> <i
-														class="fas fa-landmark text-success"></i>
-												</span> Click on verify otp button for login</li>
-											</ul>
+								<button type="button" class="btn btn-primary"
+									onclick="sendOtp()">
+									📲
+									<spring:message code="msg.submit" />
+								</button>
 
-										</div>
-									</div>
-
-
-
-								</div>
 							</div>
+
+							<!-- MESSAGE -->
+							<div id="apiMessage" class="text-center mt-3"></div>
+							<p id="errorMsg" class="text-danger text-center mt-2"></p>
+
+						</div>
+					</div>
+
+				</div>
+
+				<!-- 📘 RIGHT INSTRUCTIONS -->
+				<div class="col-lg-5 col-md-10 col-12 mt-4 mt-lg-0">
+
+					<div class="card shadow-sm border-0 instruction-card">
+
+						<div class="card-body">
+
+							<h5 class="fw-bold mb-3">
+								📘
+								<spring:message code="login.instructions" />
+							</h5>
+
+							<ul class="instruction-list">
+								<li><spring:message code="login.instructions1" /></li>
+								<li><spring:message code="login.instructions2" /></li>
+								<li><spring:message code="login.instructions3" /></li>
+								<li><spring:message code="login.instructions4" /></li>
+								<li><spring:message code="login.instructions5" /></li>
+							</ul>
+
 						</div>
 					</div>
 
 				</div>
 
 			</div>
-
 		</div>
+
 	</div>
+
 
 
 	<%@ include file="footer.jsp"%>
@@ -237,13 +270,13 @@
 	        showBtnLoader("sendOtpButton");
 	
 	        $.post(
-	            "/grampanchayat/api/citizenuser/sendOtp",
+	            "${pageContext.request.contextPath}/api/citizenuser/sendOtp",
 	            { mobileNo: mobile }
 	        )
 	        .done(function (res) {
 	
-	            if (res.message === "user not exist") {
-	                window.location.href = "/grampanchayat/userRegistration";
+	            if (res.message === "REGISTER_REQUIRED") {
+	                window.location.href = "${pageContext.request.contextPath}/userRegistration";
 	                return;
 	            }
 	
@@ -291,7 +324,7 @@
 	        showBtnLoader("verifyOtpButton");
 	
 	        $.post(
-	            "/grampanchayat/api/citizenuser/verifyOtp",
+	        	"${pageContext.request.contextPath}/api/citizenuser/verifyOtp",
 	            {
 	                mobileNo: $("#mobileNo").val(),
 	                otp: $("#otp").val(),
@@ -311,11 +344,19 @@
 	                }
 	
 	                $("#otp").val("");
-	                showError("Invalid OTP");
+	                showMessage("Invalid Mobile Number or OTP!", "error");
 	                return;
 	            }
-	
-	            window.location.href = "home";
+
+	            else if (res.success === true) {
+
+	                showMessage("Login Successful!", "success");
+
+	                setTimeout(function () {
+	    	            window.location.href = "home";
+	                }, 1500);
+
+	            }
 	        })
 	        .fail(function () {
 	            showError("Server error. Please try again.");
@@ -324,7 +365,18 @@
 	            hideBtnLoader("verifyOtpButton");
 	        });
 	    }
-	
+	    function showMessage(message, type) {
+
+	        $("#apiMessage")
+	            .removeClass("success-msg error-msg")
+	            .addClass(type === "success" ? "success-msg" : "error-msg")
+	            .html(message)
+	            .fadeIn();
+
+	        setTimeout(function () {
+	            $("#apiMessage").fadeOut();
+	        }, 4000);
+	    }
 	    /* ================= CAPTCHA ================= */
 	
 	    function refreshCaptcha() {
